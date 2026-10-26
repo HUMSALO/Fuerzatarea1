@@ -1163,19 +1163,125 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
 .stepper-cortes .stepper-btn:first-child { border-radius: 6px 0 0 6px; border-right: none; }
 .stepper-cortes .stepper-btn:last-child { border-radius: 0 6px 6px 0; border-left: none; }
 
-/* ===== FORMS LINK: compacto + copiar a la par + scroll ===== */
+/* ===== FORMS LINK: estilo Android 11 (tarjeta tipo Ajustes, campos compactos) ===== */
+#moduloFormsContenedor .box {
+    max-width: 100%;
+    padding: 10px;
+    background: #f1f3f4;
+    border-radius: 16px;
+    box-shadow: none;
+}
+#moduloFormsContenedor #tituloForms {
+    margin: 2px 0 8px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #202124;
+    text-align: center;
+}
+#moduloFormsContenedor #filaAccionesForms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+}
+#moduloFormsContenedor .btn-llenar-link {
+    width: auto;
+    height: 32px;
+    margin: 0;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 16px;
+    background: #1a73e8;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .4px;
+    box-shadow: 0 1px 2px rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+}
+#moduloFormsContenedor .btn-llenar-link:active { transform: none; opacity: 1; background: #185abc; }
+#moduloFormsContenedor .btn-llenar-link.copiando { background: #d93025; }
+#moduloFormsContenedor .estado-copiar-todo {
+    min-height: 16px;
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #5f6368;
+}
+#moduloFormsContenedor .btn-abrir-forms {
+    width: auto;
+    margin: 4px 0 0 6px;
+    padding: 4px 12px;
+    border: 1px solid #dadce0;
+    border-radius: 16px;
+    background: #fff;
+    color: #1a73e8;
+    font-size: 11px;
+    font-weight: 500;
+    box-shadow: none;
+}
+#moduloFormsContenedor .btn-modo-portapapeles {
+    width: auto !important;
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    background: #fff;
+    color: #3c4043;
+    box-shadow: none;
+}
+#moduloFormsContenedor .btn-modo-portapapeles.activo {
+    background: #e8f0fe;
+    border-color: #d2e3fc;
+    color: #1967d2;
+}
+#moduloFormsContenedor #listaForms {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+}
+#moduloFormsContenedor #sepForms { height: 8px !important; margin: 0 !important; border: 0 !important; background: #f1f3f4; }
 #moduloFormsContenedor .campo-forms-fila {
-    margin-top: 6px;
+    margin: 0;
+    padding: 8px 14px 4px;
+    border-bottom: 1px solid #eceff1;
 }
 #moduloFormsContenedor .campo-forms-fila label {
-    margin-top: 0;
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .3px;
+    color: #5f6368;
+}
+#moduloFormsContenedor .nf-num {
+    display: inline-block;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    margin-right: 7px;
+    box-sizing: border-box;
+    border-radius: 9px;
+    background: #e8f0fe;
+    color: #1967d2;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    flex-shrink: 0;
 }
 #moduloFormsContenedor .fila-forms-dato {
     display: flex;
-    align-items: stretch;
-    gap: 6px;
-    margin-top: 2px;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
 }
 #moduloFormsContenedor .fila-forms-dato > input,
 #moduloFormsContenedor .fila-forms-dato > textarea,
@@ -1184,38 +1290,40 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
     min-width: 0;
     margin-top: 0 !important;
 }
-#moduloFormsContenedor .btn-copiar-lado {
-    width: 40px;
-    min-width: 40px;
-    height: 38px;
-    margin: 0 !important;
-    padding: 0;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #777;
-    background: #eee;
-    cursor: pointer;
-    flex-shrink: 0;
+#moduloFormsContenedor .campo-forms-fila input,
+#moduloFormsContenedor .campo-forms-fila textarea {
+    height: 30px;
+    margin: 0;
+    padding: 3px 0 2px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #202124;
 }
-#moduloFormsContenedor .box {
-    max-width: 100%;
-    padding: 10px;
+#moduloFormsContenedor .campo-forms-fila input:focus,
+#moduloFormsContenedor .campo-forms-fila textarea:focus {
+    border: 0;
+    background: transparent;
+    box-shadow: inset 0 -2px 0 #1a73e8;
 }
-#moduloFormsContenedor .btn-modo-portapapeles {
-    width: auto !important;
-    margin: 0 !important;
-    padding: 6px 12px;
+#moduloFormsContenedor .campo-forms-fila textarea { height: auto; min-height: 56px; padding-top: 4px; resize: none; }
+#moduloFormsContenedor .nacionalidad { display: flex; align-items: center; gap: 8px; }
+#moduloFormsContenedor .nacionalidad input { flex: 1; min-width: 0; }
+#moduloFormsContenedor .nacionalidad select {
+    width: 108px;
+    height: 30px;
+    margin: 0;
+    padding: 0 6px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #3c4043;
     font-size: 11px;
-    font-weight: 700;
-    border-radius: 16px;
-    border: 1px solid #777;
-    background: #eee;
-    color: #333;
-}
-#moduloFormsContenedor .btn-modo-portapapeles.activo {
-    background: #2e7d32;
-    border-color: #1b5e20;
-    color: #fff;
+    font-weight: 500;
 }
 #moduloFormsContenedor .cab-forms-desplegable {
     display: flex;
@@ -1226,14 +1334,16 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
 #moduloFormsContenedor .cab-forms-desplegable label { flex: 1; min-width: 0; }
 #moduloFormsContenedor .btn-desplegar-forms {
     width: auto !important;
+    height: 26px;
     margin: 0 !important;
-    padding: 6px 10px;
+    padding: 2px 10px;
+    border: 0;
+    border-radius: 13px;
+    background: #e8f0fe;
+    color: #1967d2;
     font-size: 11px;
-    font-weight: 700;
-    border-radius: 6px;
-    border: 1px solid #777;
-    background: #eee;
-    color: #333;
+    font-weight: 500;
+    box-shadow: none;
     flex-shrink: 0;
 }
 
@@ -1778,7 +1888,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 
 /* ===== Miniatura de mapa del lugar (GPS) ===== */
 #moduloDrogas .mapa-lugar {
-    position: relative; isolation: isolate; margin-top: 8px; height: 150px;
+    position: relative; isolation: isolate; margin-top: 8px; height: 180px;
     border: 2px solid var(--inc-borde); border-radius: 12px; overflow: hidden;
     background: #eef1f6; cursor: pointer;
 }
@@ -1790,7 +1900,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     padding: 3px 8px; font-size: 11px !important; font-weight: 700;
 }
 #moduloDrogas .mapa-lugar .mapa-abrir {
-    position: absolute; right: 6px; top: 6px; z-index: 801; pointer-events: none;
+    position: absolute; right: 6px; top: 6px; z-index: 801; pointer-events: auto; cursor: pointer;
     background: var(--accent); color: #fff; border-radius: 8px;
     padding: 3px 8px; font-size: 11px !important; font-weight: 700;
 }
@@ -1862,10 +1972,47 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 #panelPlantillaOriginal input::placeholder, #panelPlantillaOriginal textarea::placeholder { font-size: 13px !important; color: #9aa3b2; }
 #panelPlantillaOriginal :is(.btn-mapa, .btn-camara, .btn-icono-guardar) { font-size: 20px !important; }
 #panelPlantillaOriginal .combo button { font-size: 0 !important; }
+/* ===== AVENIDA / CALLE: leyenda a la izquierda, cuadro de texto a la derecha ===== */
+.fila-avca { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.fila-avca label { flex: 0 0 74px; margin: 0; font-size: 13px; font-weight: 700; }
+.fila-avca input { flex: 1; min-width: 0; width: auto; margin: 0; }
+/* Mapa del lugar en Aprehensiones (mismo estilo que Incidente, movible) */
+#panelPlantillaOriginal .mapa-lugar {
+    position: relative; isolation: isolate; margin-top: 8px; height: 180px;
+    border: 2px solid #d5dae3; border-radius: 12px; overflow: hidden; background: #eef1f6;
+}
+#panelPlantillaOriginal .mapa-lugar #mapaLugarP { position: absolute; inset: 0; }
+#panelPlantillaOriginal .mapa-lugar .mapa-etq {
+    position: absolute; left: 6px; bottom: 6px; z-index: 801; pointer-events: none;
+    background: rgba(255,255,255,0.92); color: #374151; border-radius: 8px;
+    padding: 3px 8px; font-size: 11px !important; font-weight: 700;
+}
+#panelPlantillaOriginal .mapa-lugar .mapa-abrir {
+    position: absolute; right: 6px; top: 6px; z-index: 801; cursor: pointer;
+    background: var(--accent); color: #fff; border-radius: 8px;
+    padding: 3px 8px; font-size: 11px !important; font-weight: 700;
+}
+
+/* ===== Tarjeta cerrada: el título arriba y debajo el contenido completo ===== */
+:is(#moduloDrogas, #panelPlantillaOriginal) .inc-card.cerrada > .inc-titulo {
+    flex-wrap: wrap; align-items: center; align-content: center;
+    row-gap: 0; padding-top: 12px; padding-bottom: 10px;
+}
+:is(#moduloDrogas, #panelPlantillaOriginal) .inc-card.cerrada > .inc-titulo .inc-chev { order: 2; margin-left: auto; }
+:is(#moduloDrogas, #panelPlantillaOriginal) .inc-card.cerrada > .inc-titulo .inc-resumen {
+    order: 3; flex: 0 0 100%; max-width: 100%; margin: 4px 0 0; text-align: left;
+    white-space: pre-line; overflow: visible; text-overflow: clip; overflow-wrap: anywhere;
+    line-height: 1.35;
+}
+
+/* Marca de agua de versión */
+#marcaVersion { position: fixed; top: 4px; right: 8px; z-index: 9999; pointer-events: none;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.5px; color: #1f2937; opacity: 0.28; user-select: none; }
 </style>
 </head>
 
 <body>
+<div id="marcaVersion" aria-hidden="true">V15</div>
 <div class="contenedor">
 
 <!-- ================= MÓDULO DATOS ================= -->
@@ -2093,6 +2240,15 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <div class="inc-cuerpo">
     <input type="datetime-local" id="fechaIncidente" placeholder="FECHA Y HORA">
 
+    <div class="fila-avca">
+        <label for="avenidaNum">AVENIDA</label>
+        <input id="avenidaNum" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
+    </div>
+    <div class="fila-avca">
+        <label for="calleNum">CALLE</label>
+        <input id="calleNum" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
+    </div>
+
 <div class="grupo-lugar" style="margin-top:8px;">
         <div class="combo-wrapper" style="flex:1; margin-top:0;">
             <div class="combo">
@@ -2105,8 +2261,8 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     </div>
     <div id="mapaLugarCaja" class="mapa-lugar" style="display:none;">
         <div id="mapaLugar"></div>
-        <div class="mapa-toque" onclick="App.Modulos.Incidente.abrirMapaExterno()" title="ABRIR EN MAPAS"></div>
-        <span class="mapa-abrir">ABRIR MAPA ↗</span>
+        
+        <span class="mapa-abrir" onclick="App.Modulos.Incidente.abrirMapaExterno()">ABRIR MAPA ↗</span>
         <span class="mapa-etq" id="mapaLugarEtq"></span>
     </div>
 
@@ -2391,6 +2547,14 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <section class="inc-card cerrada" data-sec="lugar" style="--c:#1b6ef3">
         <h2 class="inc-titulo" role="button" tabindex="0" aria-expanded="false"><span class="inc-nombre">Lugar</span><span class="inc-resumen"></span><i class="inc-chev"></i></h2>
         <div class="inc-cuerpo">
+        <div class="fila-avca">
+            <label for="avenidaNumP">AVENIDA</label>
+            <input id="avenidaNumP" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
+        </div>
+        <div class="fila-avca">
+            <label for="calleNumP">CALLE</label>
+            <input id="calleNumP" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
+        </div>
         <div class="grupo-lugar">
             <div class="combo-wrapper" style="flex:1; margin-top:0;">
                 <div class="combo">
@@ -2400,6 +2564,11 @@ body.en-incidente .contenedor { overflow-anchor: none; }
                 <div id="listaLugarPlantilla" class="lista"></div>
             </div>
             <button class="btn-mapa" onclick="App.Utilidades.obtenerGPS('lugarPlantilla','aprehension')" title="CARGAR LUGAR"></button>
+        </div>
+        <div id="mapaLugarPCaja" class="mapa-lugar" style="display:none;">
+            <div id="mapaLugarP"></div>
+            <span class="mapa-abrir" onclick="App.Utilidades.abrirMapaExterno('lugarPlantilla')">ABRIR MAPA ↗</span>
+            <span class="mapa-etq" id="mapaLugarPEtq"></span>
         </div>
         </div>
         </section>
@@ -3118,11 +3287,12 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 <!-- ================= MODULO PLANTILLAS FORMS DIRECTO ================= -->
 <div id="moduloFormsContenedor" class="oculto">
     <div class="box">
-        <div id="filaModoPortapapeles" style="display:none;justify-content:flex-end;margin-bottom:6px;">
-            <button type="button" id="btnModoPortapapeles" class="btn-modo-portapapeles" onclick="App.Modulos.Forms.alternarModoPortapapeles()">📋 LLENADO CON PORTAPAPELES</button>
-        </div>
         <h2 id="tituloForms" style="text-align:center; font-size:18px; margin-top:0;"></h2>
-        <button id="btnPrincipalExportar" class="forms" style="margin-bottom:15px;" onclick="App.Modulos.Forms.manejarBotonPrincipal()">EXPORTAR</button>
+        <div id="filaAccionesForms">
+            <button type="button" id="btnModoPortapapeles" class="btn-modo-portapapeles" style="display:none;" onclick="App.Modulos.Forms.alternarModoPortapapeles()">📋 LLENADO CON PORTAPAPELES</button>
+            <button id="btnPrincipalExportar" type="button" class="btn-llenar-link" onclick="App.Modulos.Forms.llenarLink()">🔗 LLENAR LINK</button>
+        </div>
+        <div id="estadoCopiarTodo" class="estado-copiar-todo"></div>
         <div id="listaForms"></div>
         <button class="limpiar" style="margin-top:15px;" onclick="App.Modulos.Forms.volver()">⬅ VOLVER</button>
     </div>
@@ -3209,6 +3379,160 @@ async function cargarLibreriasMapa() {
         return true;
     } catch(e) { console.warn("MAPA:", e); return false; }
 }
+
+/* ===== BUSCAR LUGAR: avenida / calle numeradas más cercanas (lógica de BuscarLugar-5) ===== */
+const BuscarLugar = (function() {
+    const ORDINALES = {
+        central: 0, cero: 0,
+        primera: 1, primero: 1, segunda: 2, segundo: 2, tercera: 3, tercero: 3,
+        cuarta: 4, cuarto: 4, quinta: 5, quinto: 5, sexta: 6, sexto: 6,
+        septima: 7, septimo: 7, octava: 8, octavo: 8, novena: 9, noveno: 9,
+        decima: 10, decimo: 10, undecima: 11, undecimo: 11, duodecima: 12, duodecimo: 12
+    };
+    const sinTildes = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+    function numeroDe(nombre, tipo) {
+        const n = sinTildes(nombre);
+        const pal = tipo === "avenida" ? "(?:avenida|av\\.?)" : "calle";
+        const cifra = n.match(new RegExp("\\b" + pal + "\\s*(\\d+)\\b"));
+        if (cifra) return Number(cifra[1]);
+        const palabra = n.match(new RegExp("\\b" + pal + "\\s+([a-z]+)\\b"));
+        if (palabra && Object.prototype.hasOwnProperty.call(ORDINALES, palabra[1])) return ORDINALES[palabra[1]];
+        return null;
+    }
+
+    const MAX_DIST = 250;   // metros
+    function distanciaAVia(p, lat, lon) {
+        const kLat = 111320, kLon = 111320 * Math.cos(lat * Math.PI / 180);
+        let min = Infinity;
+        for (let i = 0; i + 3 < p.length; i += 2) {
+            const ax = (p[i + 1] - lon) * kLon, ay = (p[i] - lat) * kLat;
+            const bx = (p[i + 3] - lon) * kLon, by = (p[i + 2] - lat) * kLat;
+            const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy;
+            const t = l2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2)) : 0;
+            min = Math.min(min, Math.hypot(ax + t * dx, ay + t * dy));
+        }
+        if (p.length === 2) min = Math.hypot((p[1] - lon) * kLon, (p[0] - lat) * kLat);
+        return min;
+    }
+    function elegirVias(vias, lat, lon) {
+        const mejor = { a: null, c: null };
+        vias.forEach(v => {
+            const d = distanciaAVia(v.p, lat, lon);
+            if (d <= MAX_DIST && (!mejor[v.t] || d < mejor[v.t].d)) mejor[v.t] = { n: v.n, d };
+        });
+        return { avenida: mejor.a, calle: mejor.c };
+    }
+    function textoLugar(r) {
+        if (r.avenida && r.calle) return `AVENIDA ${r.avenida.n} CALLE ${r.calle.n}`;
+        if (r.avenida) return `AVENIDA ${r.avenida.n}`;
+        if (r.calle) return `CALLE ${r.calle.n}`;
+        return "";
+    }
+    function parsearVias(elementos) {
+        const r5 = x => Math.round(x * 1e5) / 1e5;
+        const vias = [];
+        (elementos || []).forEach(v => {
+            const nombre = v.tags && v.tags.name;
+            if (!nombre || !Array.isArray(v.geometry) || !v.geometry.length) return;
+            const na = numeroDe(nombre, "avenida"), nc = numeroDe(nombre, "calle");
+            const tipo = na !== null ? "a" : (nc !== null ? "c" : null);
+            if (!tipo) return;
+            const p = [];
+            v.geometry.forEach(g => { if (g && typeof g.lat === "number" && typeof g.lon === "number") p.push(r5(g.lat), r5(g.lon)); });
+            if (p.length >= 2) vias.push({ t: tipo, n: tipo === "a" ? na : nc, p });
+        });
+        return vias;
+    }
+
+    /* Calles de la zona: se descargan una vez y se guardan */
+    const SERVIDORES = [
+        "https://overpass-api.de/api/interpreter",
+        "https://overpass.kumi.systems/api/interpreter",
+        "https://overpass.private.coffee/api/interpreter",
+        "https://overpass.openstreetmap.fr/api/interpreter",
+        "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+    ];
+    const CELDA = 0.02, MARGEN = 0.004, PREF = "buscarlugar_zona_v1_";
+    const memoria = {}, enVuelo = {};
+
+    function claveZona(lat, lon) { return Math.floor(lat / CELDA) + "_" + Math.floor(lon / CELDA); }
+    function leerCache(clave) {
+        if (memoria[clave]) return memoria[clave];
+        try {
+            const s = localStorage.getItem(PREF + clave);
+            if (s) {
+                const o = JSON.parse(s);
+                if (Date.now() - o.t < 30 * 864e5) { memoria[clave] = o.v; return o.v; }
+            }
+        } catch (e) {}
+        return null;
+    }
+    function guardarCache(clave, vias) {
+        memoria[clave] = vias;
+        const guardar = () => localStorage.setItem(PREF + clave, JSON.stringify({ t: Date.now(), v: vias }));
+        try { guardar(); } catch (e) {
+            try {
+                Object.keys(localStorage).filter(k => k.startsWith(PREF)).forEach(k => localStorage.removeItem(k));
+                guardar();
+            } catch (e2) {}
+        }
+    }
+    function overpass(consulta, ms) {
+        const ctrls = [];
+        const pedir = (url) => {
+            const host = new URL(url).host;
+            const c = new AbortController();
+            ctrls.push(c);
+            const t = setTimeout(() => c.abort(), ms);
+            return fetch(url + "?data=" + encodeURIComponent(consulta), { signal: c.signal })
+                .then(async r => {
+                    clearTimeout(t);
+                    if (!r.ok) throw new Error(host + ": HTTP " + r.status);
+                    const d = await r.json();
+                    if (!d || !Array.isArray(d.elements)) throw new Error(host + ": RESPUESTA VACÍA");
+                    if (d.remark && /error|timed out|out of memory/i.test(d.remark)) throw new Error(host + ": SERVIDOR SATURADO");
+                    return d;
+                })
+                .catch(e => {
+                    clearTimeout(t);
+                    if (e.message && e.message.startsWith(host)) throw e;
+                    throw new Error(host + ": " + (e.name === "AbortError" ? "TIEMPO AGOTADO" : "SIN RESPUESTA"));
+                });
+        };
+        return Promise.any(SERVIDORES.map(pedir)).then(d => { ctrls.forEach(c => c.abort()); return d; });
+    }
+    async function descargarZona(clave, lat, lon) {
+        const ty = Math.floor(lat / CELDA), tx = Math.floor(lon / CELDA);
+        const r5 = x => Math.round(x * 1e5) / 1e5;
+        const s = r5(ty * CELDA - MARGEN), w = r5(tx * CELDA - MARGEN), n = r5((ty + 1) * CELDA + MARGEN), e = r5((tx + 1) * CELDA + MARGEN);
+        const consulta = `[out:json][timeout:40];way["highway"]["name"~"^(avenida|av|calle)[. ]",i](${s},${w},${n},${e});out geom;`;
+        let ultimoError = null;
+        for (let intento = 1; intento <= 3; intento++) {
+            try {
+                const d = await overpass(consulta, 30000);
+                const vias = parsearVias(d.elements);
+                guardarCache(clave, vias);
+                return vias;
+            } catch (err) {
+                ultimoError = err;
+                await new Promise(ok => setTimeout(ok, 1500));
+            }
+        }
+        console.warn("BUSCAR LUGAR: no se pudo descargar la zona", ultimoError);
+        throw new Error("DESCARGA");
+    }
+    function obtenerVias(lat, lon) {
+        const clave = claveZona(lat, lon);
+        const guardadas = leerCache(clave);
+        if (guardadas) return Promise.resolve(guardadas);
+        if (!enVuelo[clave]) {
+            enVuelo[clave] = descargarZona(clave, lat, lon).finally(() => { delete enVuelo[clave]; });
+        }
+        return enVuelo[clave];
+    }
+    return { obtenerVias, elegirVias, textoLugar };
+})();
 
 const App = {
     Data: {
@@ -3600,7 +3924,14 @@ const App = {
                 if(App.Modulos.Incidente.renderLista) App.Modulos.Incidente.renderLista();
                 App.Utilidades.autoLugar();
             }
-            if(id === 'moduloCadenaCustodia') App.Modulos.Custodia.buscar();
+            if(id === 'moduloCadenaCustodia') {
+                if(App.Modulos.Custodia._retornoDeForms) {
+                    App.Modulos.Custodia._retornoDeForms = false;
+                    App.Modulos.Custodia.reanudar();
+                } else {
+                    App.Modulos.Custodia.buscar();
+                }
+            }
           if(id === 'moduloDatos') {
                 App.Modulos.Datos.refrescarSelectsDatos();
             }
@@ -3836,7 +4167,7 @@ const App = {
                 lista.appendChild(itemC);
             })();
            this.crearLista("listaLugar", App.Data.barriosBase, "lugar", () => {
-                if(App.Modulos.Incidente.ocultarMapa) App.Modulos.Incidente.ocultarMapa();
+                if(App.Modulos.Incidente.ocultarMapa) App.Modulos.Incidente.ocultarMapa(); if(App.Modulos.Incidente.limpiarAvCa) App.Modulos.Incidente.limpiarAvCa();
                 App.UI.actualizarResumenCampo('resumenLugar','lugar','LUGAR');
                 App.UI.cerrarListas();
             }, true);
@@ -3870,6 +4201,7 @@ const App = {
             this.crearLista("listaDelitoPlantilla", App.Data.delitosPlantilla.hasOwnProperty(tipoPlantilla.value.trim().toUpperCase()) ? App.Data.delitosPlantilla[tipoPlantilla.value.trim().toUpperCase()] : [], "delitoPlantilla", () => App.Modulos.Aprehension.seleccionarDelitoPlantilla(), true);
             App.Modulos.Aprehension.actualizarResumenTipoDelito();
             this.crearLista("listaLugarPlantilla", App.Data.barriosBase, "lugarPlantilla", (val) => {
+                App.Utilidades.limpiarAvCa('lugarPlantilla'); App.Utilidades.ocultarMapa('lugarPlantilla');
                 // Orden como antes: LUGAR, DISTRITO, CANTÓN, PROVINCIA
                 if(val) {
                     let elDist = document.getElementById('distrito');
@@ -4165,164 +4497,171 @@ const App = {
             if(v !== '' && v !== 'NO SE LOGRA UBICAR') return;
             this.obtenerGPS(campo, campo === 'lugarPlantilla' ? 'aprehension' : '');
         },
-        obtenerGPS(campo, campoBarrio) {
+        // ===== BUSCAR LUGAR (avenida / calle) con la lógica de BuscarLugar =====
+        // Cada campo con mapa y cuadros de avenida/calle se declara aquí.
+        CFG: {
+            lugar:          { av: 'avenidaNum',  ca: 'calleNum',  caja: 'mapaLugarCaja',  div: 'mapaLugar',  etq: 'mapaLugarEtq' },
+            lugarPlantilla: { av: 'avenidaNumP', ca: 'calleNumP', caja: 'mapaLugarPCaja', div: 'mapaLugarP', etq: 'mapaLugarPEtq' }
+        },
+        _mapas: {},
+        obtenerGPS(campo) {
+            let el = document.getElementById(campo);
+            if(!el) return;
             if(!navigator.geolocation) { alert("GPS NO DISPONIBLE"); return; }
-            let elLugar = document.getElementById(campo);
-            let elBarrio = campoBarrio ? document.getElementById(campoBarrio) : null;
-
-            elLugar.value = "CARGANDO...";
-            if(campo === 'lugar' && App.Modulos.Incidente.ocultarMapa) App.Modulos.Incidente.ocultarMapa();
-            if(campo === 'lugar') App.UI.actualizarResumenCampo('resumenLugar','lugar','LUGAR');
-            if(campo === 'lugarPlantilla') App.UI.actualizarResumenCampo('resumenLugarPlantilla','lugarPlantilla','LUGAR');
-            if(elBarrio) elBarrio.value = "";
-            if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre();
-
-            // Sigue buscando hasta encontrar el lugar; se detiene si el usuario escribe/elige uno o lanza otra búsqueda
-            const token = this._tokenLugar = (this._tokenLugar || 0) + 1;
-            this._finLugar = Date.now() + 12000;   // tope: si en 12 s no hay lugar, se detiene
-            const vigente = () => token === this._tokenLugar && elLugar.value === "CARGANDO...";
+            const token = this.marcarBuscando(campo);
+            this._finLugar = Date.now() + 15000;   // tope: si en 15 s no hay GPS, se detiene
+            const vigente = () => token === this._tokenLugar && el.value === "CARGANDO...";
             const pedir = () => navigator.geolocation.getCurrentPosition(pos => {
                 if(!vigente()) return;
-                if(campo === 'lugar') App.Modulos.Incidente.mostrarMapa(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
-                this.buscarLugar(pos.coords.latitude, pos.coords.longitude, campo, 0, token);
-                if(campoBarrio) this.buscarBarrio(pos.coords.latitude, pos.coords.longitude, campoBarrio);
+                if(this.CFG[campo]) this.mostrarMapa(campo, pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, false);
+                this.resolverLugar(pos.coords.latitude, pos.coords.longitude, campo, token);
             }, (err) => {
                 if(!vigente()) return;
-                if(err && err.code === 1) {   // permiso de ubicación denegado: reintentar no sirve
-                    elLugar.value = "NO SE LOGRA UBICAR";
-                    if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre();
-                } else if(Date.now() > this._finLugar) {
-                    elLugar.value = "NO SE LOGRA UBICAR";
-                    if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre();
-                } else {
-                    setTimeout(() => { if(vigente()) pedir(); }, 1500);
-                }
-            }, { maximumAge: 15000, timeout: 10000 });
+                if((err && err.code === 1) || Date.now() > this._finLugar) this.fallaLugar(campo);
+                else setTimeout(() => { if(vigente()) pedir(); }, 1500);
+            }, { enableHighAccuracy: true, maximumAge: 15000, timeout: 10000 });
             pedir();
         },
-        // Consulta tres servidores de Overpass a la vez y usa el que responda primero
-        consultarOverpass(consulta) {
-            const servidores = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"];
-            const ctrls = [];
-            const pedir = (url) => {
-                const c = new AbortController();
-                ctrls.push(c);
-                const t = setTimeout(() => c.abort(), 3500);
-                return fetch(url + "?data=" + encodeURIComponent(consulta), { signal: c.signal })
-                    .then(r => { clearTimeout(t); if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-                    .catch(e => { clearTimeout(t); throw e; });
-            };
-            return Promise.any(servidores.map(pedir)).then(d => { ctrls.forEach(c => c.abort()); return d; });
+        // Punto tocado a mano en el mapa
+        buscarPuntoManual(campo, lat, lon) {
+            if(!document.getElementById(campo)) return;
+            const token = this.marcarBuscando(campo);
+            this.resolverLugar(lat, lon, campo, token);
         },
-        // Calles cercanas desde Photon (respaldo rápido): puntos en vez de trazados, mismo formato que Overpass
-        consultarPhoton(lat, lon) {
-            return fetch(`https://photon.komoot.io/reverse?lat=${lat}&lon=${lon}&radius=0.1&distance_sort=true&limit=10&osm_tag=highway`, { signal: AbortSignal.timeout(3500) })
-            .then(r => r.json())
-            .then(d => ({ elements: (d.features || [])
-                .filter(f => f.properties && f.properties.name && f.geometry && f.geometry.type === "Point")
-                .map(f => ({ tags: { name: f.properties.name }, geometry: [{ lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] }] })) }));
-        },
-        // Usa Overpass (exacto); si solo responde Photon, espera 2,5 s a Overpass y luego usa Photon
-        obtenerDatosLugar(lat, lon, consulta) {
-            const op = this.consultarOverpass(consulta);
-            const ph = this.consultarPhoton(lat, lon);
-            return new Promise((ok, no) => {
-                let fin = false, respaldo = null;
-                const dar = (d) => { if(!fin) { fin = true; ok(d); } };
-                op.then(dar).catch(() => {});
-                ph.then(d => { if(d.elements.length) { respaldo = d; setTimeout(() => dar(d), 2500); } }).catch(() => {});
-                Promise.allSettled([op, ph]).then(() => { if(!fin) { if(respaldo) dar(respaldo); else no(new Error("sin datos")); } });
-            });
-        },
-        buscarLugar(lat, lon, campo, intento, token) {
+        marcarBuscando(campo) {
             let el = document.getElementById(campo);
-            const vigente = () => token === this._tokenLugar && el.value === "CARGANDO...";
-            const reintentar = () => {
-                if(!vigente()) return;
-                if(Date.now() > this._finLugar) { el.value = "NO SE LOGRA UBICAR"; if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre(); return; }
-                setTimeout(() => this.buscarLugar(lat, lon, campo, intento + 1, token), 500);
-            };
-            let consulta = `[out:json][timeout:8];(way(around:90,${lat},${lon})["highway"]["name"];);out geom;`;
-            this.obtenerDatosLugar(lat, lon, consulta)
-            .then(data => {
-                let avDist = {}, caDist = {}, respaldo = "";
-                // Distancia (m) del punto GPS a cada tramo de la calle (plano local lat/lon -> metros)
-                const kLat = 111320, kLon = 111320 * Math.cos(lat * Math.PI / 180);
-                const distSegmento = (ax, ay, bx, by) => {
-                    let dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy;
-                    let t = l2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2)) : 0;
-                    return Math.hypot(ax + t * dx, ay + t * dy);
-                };
-                const distCalle = (geom) => {
-                    if(!Array.isArray(geom) || !geom.length) return 1e9;
-                    let pts = geom.filter(g => g && typeof g.lat === "number" && typeof g.lon === "number")
-                                  .map(g => ({ x: (g.lon - lon) * kLon, y: (g.lat - lat) * kLat }));
-                    if(!pts.length) return 1e9;
-                    if(pts.length === 1) return Math.hypot(pts[0].x, pts[0].y);
-                    let m = 1e9;
-                    for(let i = 0; i < pts.length - 1; i++) m = Math.min(m, distSegmento(pts[i].x, pts[i].y, pts[i+1].x, pts[i+1].y));
-                    return m;
-                };
-                (data.elements || []).forEach(v => {
-                    let nombre = (v.tags && v.tags.name) || "";
-                    if(!nombre) return;
-                    if(!respaldo) respaldo = nombre;
-                    let d = distCalle(v.geometry);
-                    let av = nombre.match(/avenida\s*(\d+)/i);
-                    if(av && !(av[1] in avDist && avDist[av[1]] <= d)) avDist[av[1]] = d;
-                    let ca = nombre.match(/calle\s*(\d+)/i);
-                    if(ca && !(ca[1] in caDist && caDist[ca[1]] <= d)) caDist[ca[1]] = d;
-                });
-                // Las más cercanas primero (distancia mínima por número); al mostrar se ordenan de menor a mayor
-                const masCercanas = (obj, n) => Object.keys(obj).sort((a,b) => obj[a] - obj[b]).slice(0, n).sort((a,b) => a - b);
-                let avenidas = masCercanas(avDist, 2), calles = masCercanas(caDist, 2);
-                let avUna = masCercanas(avDist, 1)[0], caUna = masCercanas(caDist, 1)[0]; // la más cercana cuando solo se muestra una
-                let totAv = Object.keys(avDist).length, totCa = Object.keys(caDist).length;
-
-                let resultado = "";
-                if(totAv >= 2 && totCa >= 1) {
-                    resultado = `AVENIDA ${avenidas[0]} Y ${avenidas[1]} CALLE ${caUna}`;
-                } else if(totCa >= 2 && totAv >= 1) {
-                    resultado = `AVENIDA ${avUna} CALLE ${calles[0]} Y ${calles[1]}`;
-                } else if(totAv >= 1 && totCa >= 1) {
-                    resultado = `AVENIDA ${avUna} CALLE ${caUna}`;
-                } else if(totAv >= 1) {
-                    resultado = `AVENIDA ${avUna}`;
-                } else if(totCa >= 1) {
-                    resultado = `CALLE ${caUna}`;
-                } else {
-                    resultado = respaldo || "";
-                }
-
-                if(resultado) {
-                    if(!vigente()) return;
-                    if(campo === 'lugarPlantilla') {
-                        let canton = document.getElementById('canton').value || 'SAN JOSÉ';
-                        let distrito = document.getElementById('distrito').value || 'CATEDRAL';
-                        let provincia = 'SAN JOSÉ';
-                        el.value = (resultado + ',' + distrito + ',' + canton + ',' + provincia).toUpperCase();
-                        App.UI.actualizarResumenCampo('resumenLugarPlantilla','lugarPlantilla','LUGAR');
-                        if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre();
-                    } else {
-                        el.value = resultado.toUpperCase(); if(window._actualizarResumenInc) window._actualizarResumenInc(); if(window._actualizarResumenApre) window._actualizarResumenApre();
-                        if(campo === 'lugar') App.UI.actualizarResumenCampo('resumenLugar','lugar','LUGAR');
-                    }
-                } else {
-                    reintentar();
-                }
-            }).catch(() => reintentar());
+            this._tokenLugar = (this._tokenLugar || 0) + 1;
+            el.value = "CARGANDO...";
+            this.limpiarAvCa(campo);
+            this.refrescarResumenLugar();
+            return this._tokenLugar;
         },
-        buscarBarrio(lat, lon, campoBarrio) {
-            const poner = (txt) => {
-                let el = document.getElementById(campoBarrio);
-                if(el && !el.value.trim()) el.value = (txt || "NO SE LOGRA UBICAR").toUpperCase();
-            };
-            fetch(`https://photon.komoot.io/reverse?lat=${lat}&lon=${lon}&limit=1`, { signal: AbortSignal.timeout(3500) })
-            .then(r => r.json())
-            .then(d => {
-                let p = (d.features && d.features[0] && d.features[0].properties) || {};
-                poner(p.locality || p.district || "");
-            }).catch(() => poner(""));
+        refrescarResumenLugar() {
+            App.UI.actualizarResumenCampo('resumenLugar','lugar','LUGAR');
+            App.UI.actualizarResumenCampo('resumenLugarPlantilla','lugarPlantilla','LUGAR');
+            if(window._actualizarResumenInc) window._actualizarResumenInc();
+            if(window._actualizarResumenApre) window._actualizarResumenApre();
+        },
+        fallaLugar(campo) {
+            let el = document.getElementById(campo);
+            if(!el) return;
+            if(campo === 'cpSector') { el.value = ""; alert("NO SE LOGRA UBICAR"); return; }
+            el.value = "NO SE LOGRA UBICAR";
+            this.limpiarAvCa(campo);
+            let st = this._mapas[campo];
+            // Sin punto: se muestra el mapa para ubicar tocando
+            if(this.CFG[campo] && !(st && st.coords)) this.mostrarMapa(campo, null);
+            this.refrescarResumenLugar();
+        },
+        _armarPlantilla(txt) {
+            let elDist = document.getElementById('distrito'), elCant = document.getElementById('canton');
+            let distrito = (elDist && elDist.value) ? elDist.value : 'CATEDRAL';
+            let canton = (elCant && elCant.value) ? elCant.value : 'SAN JOSÉ';
+            return (txt + ',' + distrito + ',' + canton + ',SAN JOSÉ').toUpperCase();
+        },
+        async resolverLugar(lat, lon, campo, token) {
+            let el = document.getElementById(campo);
+            const vigente = () => token === this._tokenLugar && el && el.value === "CARGANDO...";
+            let vias;
+            try { vias = await BuscarLugar.obtenerVias(lat, lon); }
+            catch(e) { if(vigente()) this.fallaLugar(campo); return; }
+            if(!vigente()) return;
+            let r = BuscarLugar.elegirVias(vias, lat, lon);
+            let txt = BuscarLugar.textoLugar(r);
+            if(!txt) { this.fallaLugar(campo); return; }
+            let cfg = this.CFG[campo];
+            if(cfg) {
+                let a = document.getElementById(cfg.av), c = document.getElementById(cfg.ca);
+                if(a) a.value = r.avenida ? String(r.avenida.n) : "";
+                if(c) c.value = r.calle ? String(r.calle.n) : "";
+                el.value = campo === 'lugar' ? txt.toUpperCase() : this._armarPlantilla(txt);
+            } else {
+                el.value = txt.toUpperCase();
+                if(campo === 'cpSector' && App.Modulos.Aprehension) App.Modulos.Aprehension.actualizarLugarCompuesto();
+            }
+            this.refrescarResumenLugar();
+        },
+        // Cuadros de texto de avenida y calle
+        limpiarAvCa(campo) {
+            let cfg = this.CFG[campo]; if(!cfg) return;
+            let a = document.getElementById(cfg.av), c = document.getElementById(cfg.ca);
+            if(a) a.value = "";
+            if(c) c.value = "";
+        },
+        componerLugar(campo) {
+            let cfg = this.CFG[campo]; if(!cfg) return;
+            let a = (document.getElementById(cfg.av).value || "").trim();
+            let c = (document.getElementById(cfg.ca).value || "").trim();
+            this._tokenLugar = (this._tokenLugar || 0) + 1;   // cancela una búsqueda en curso
+            let partes = [a ? "AVENIDA " + a : "", c ? "CALLE " + c : ""].filter(Boolean).join(" ");
+            document.getElementById(campo).value = campo === 'lugar' ? partes : (partes ? this._armarPlantilla(partes) : "");
+            this.refrescarResumenLugar();
+        },
+        sincronizarAvCaDesdeLugar(campo, texto) {
+            let cfg = this.CFG[campo]; if(!cfg) return;
+            let t = String(texto || "").toUpperCase();
+            let a = t.match(/AVENIDA\s+(\d+)/), c = t.match(/CALLE\s+(\d+)/);
+            let ea = document.getElementById(cfg.av), ec = document.getElementById(cfg.ca);
+            if(ea) ea.value = a ? a[1] : "";
+            if(ec) ec.value = c ? c[1] : "";
+        },
+        // ===== Mapa movible: se puede arrastrar, ampliar, y al tocarlo ubica ahí el punto =====
+        async mostrarMapa(campo, lat, lon, prec, manual) {
+            let cfg = this.CFG[campo]; if(!cfg) return;
+            let st = this._mapas[campo] = this._mapas[campo] || { mapa: null, capa: null, coords: null, tok: 0 };
+            const sinPunto = (lat === null || lat === undefined);
+            st.coords = sinPunto ? null : { lat: lat, lon: lon };
+            const tk = ++st.tok;
+            let caja = document.getElementById(cfg.caja);
+            if(!caja) return;
+            caja.style.display = "block";
+            let etq = document.getElementById(cfg.etq);
+            if(etq) etq.textContent = sinPunto ? "TOCA EL MAPA PARA UBICAR" : (manual ? "PUNTO MANUAL" : (prec ? "PRECISIÓN ±" + Math.round(prec) + " M · TOCA PARA CAMBIAR" : "TOCA PARA CAMBIAR"));
+            let ok = await cargarLibreriasMapa();
+            if(!ok) { caja.style.display = "none"; return; }
+            if(tk !== st.tok) return;   // se limpió o cambió mientras cargaba
+            if(!st.mapa) {
+                st.mapa = L.map(cfg.div, { zoomControl: true, scrollWheelZoom: false, tap: false });
+                L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OSM" }).addTo(st.mapa);
+                st.mapa.setView([9.9328, -84.0795], 15);
+                // Tocar el mapa ubica ahí el punto y vuelve a buscar avenida y calle
+                st.mapa.on("click", e => this.ubicarManual(campo, e.latlng.lat, e.latlng.lng));
+            }
+            if(st.capa) st.capa.remove();
+            st.capa = L.layerGroup().addTo(st.mapa);
+            if(!sinPunto) {
+                if(prec && prec > 5) L.circle([lat, lon], { radius: Math.min(prec, 200), color: "#1b6ef3", weight: 1, fillOpacity: 0.12 }).addTo(st.capa);
+                L.circleMarker([lat, lon], { radius: 8, color: "#fff", weight: 3, fillColor: "#e53935", fillOpacity: 1 }).addTo(st.capa);
+                if(!manual) st.mapa.setView([lat, lon], 17);
+            }
+            setTimeout(() => {
+                if(!st.mapa) return;
+                st.mapa.invalidateSize();
+                if(!sinPunto && !manual) st.mapa.setView([lat, lon], 17);
+            }, 120);
+        },
+        ubicarManual(campo, lat, lon) {
+            this.mostrarMapa(campo, lat, lon, 0, true);
+            this.buscarPuntoManual(campo, lat, lon);
+        },
+        ocultarMapa(campo) {
+            let cfg = this.CFG[campo]; if(!cfg) return;
+            let st = this._mapas[campo];
+            if(st) { st.tok++; st.coords = null; }
+            let caja = document.getElementById(cfg.caja);
+            if(caja) caja.style.display = "none";
+        },
+        // Al abrir una sección que estaba cerrada, el mapa necesita recalcular su tamaño
+        refrescarMapa(campo) {
+            let st = this._mapas[campo];
+            if(!st || !st.mapa) return;
+            st.mapa.invalidateSize();
+            if(st.coords) st.mapa.setView([st.coords.lat, st.coords.lon], st.mapa.getZoom());
+        },
+        abrirMapaExterno(campo) {
+            let st = this._mapas[campo];
+            let c = st && st.coords;
+            if(c) window.open("https://www.google.com/maps?q=" + c.lat + "," + c.lon, "_blank");
         },
         obtenerOficial(nombre) {
             return App.Data.oficiales.find(x => (x.nombre || "").toUpperCase() === (nombre || "").toUpperCase());
@@ -5770,36 +6109,12 @@ const App = {
             _coordsLugar: null,
             _mapa: null,
             _capaMapa: null,
-            async mostrarMapa(lat, lon, prec) {
-                this._coordsLugar = { lat: lat, lon: lon };
-                let caja = document.getElementById("mapaLugarCaja");
-                if(!caja) return;
-                caja.style.display = "block";
-                let etq = document.getElementById("mapaLugarEtq");
-                if(etq) etq.textContent = prec ? "PRECISIÓN ±" + Math.round(prec) + " M" : "";
-                let ok = await cargarLibreriasMapa();
-                if(!ok) { caja.style.display = "none"; return; }
-                if(!this._coordsLugar || this._coordsLugar.lat !== lat) return; // se limpió mientras cargaba
-                if(!this._mapa) {
-                    this._mapa = L.map("mapaLugar", { zoomControl: false, dragging: false, touchZoom: false, doubleClickZoom: false, scrollWheelZoom: false, boxZoom: false, keyboard: false, tap: false });
-                    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OSM" }).addTo(this._mapa);
-                }
-                if(this._capaMapa) this._capaMapa.remove();
-                this._capaMapa = L.layerGroup().addTo(this._mapa);
-                if(prec && prec > 5) L.circle([lat, lon], { radius: Math.min(prec, 200), color: "#1b6ef3", weight: 1, fillOpacity: 0.12 }).addTo(this._capaMapa);
-                L.circleMarker([lat, lon], { radius: 8, color: "#fff", weight: 3, fillColor: "#e53935", fillOpacity: 1 }).addTo(this._capaMapa);
-                this._mapa.setView([lat, lon], 15);
-                setTimeout(() => { if(this._mapa) { this._mapa.invalidateSize(); this._mapa.setView([lat, lon], 15); } }, 120);
-            },
-            ocultarMapa() {
-                this._coordsLugar = null;
-                let caja = document.getElementById("mapaLugarCaja");
-                if(caja) caja.style.display = "none";
-            },
-            abrirMapaExterno() {
-                let c = this._coordsLugar;
-                if(c) window.open("https://www.google.com/maps?q=" + c.lat + "," + c.lon, "_blank");
-            },
+            mostrarMapa(lat, lon, prec, manual) { return App.Utilidades.mostrarMapa('lugar', lat, lon, prec, manual); },
+            ocultarMapa() { App.Utilidades.ocultarMapa('lugar'); },
+            limpiarAvCa() { App.Utilidades.limpiarAvCa('lugar'); },
+            componerLugar() { App.Utilidades.componerLugar('lugar'); },
+            sincronizarAvCaDesdeLugar(t) { App.Utilidades.sincronizarAvCaDesdeLugar('lugar', t); },
+            abrirMapaExterno() { App.Utilidades.abrirMapaExterno('lugar'); },
 
             // Botón LIMPIAR: pide confirmación, limpia y sube al inicio de la página
             limpiarConfirmar() {
@@ -5812,7 +6127,7 @@ const App = {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             },
             limpiar() {
-                this.ocultarMapa();
+                this.ocultarMapa(); this.limpiarAvCa();
                 lugar.value = ""; nombre.value = ""; cedula.value = "";
                 fechaNacimientoIncidente.value = "";
                 this.itemsDroga = [];
@@ -5972,17 +6287,7 @@ const App = {
             },
 
             // ── GPS para el formulario de Captura ──
-            obtenerGPSCaptura() {
-                if(!navigator.geolocation) { alert("GPS NO DISPONIBLE EN ESTE DISPOSITIVO"); return; }
-                navigator.geolocation.getCurrentPosition(pos => {
-                    let lat = pos.coords.latitude.toFixed(6);
-                    let lng = pos.coords.longitude.toFixed(6);
-                    let sector = document.getElementById('cpSector');
-                    sector.value = (sector.value ? sector.value + ' ' : '') + lat + ',' + lng;
-                    sector.value = sector.value.toUpperCase();
-                    this.actualizarLugarCompuesto();
-                }, () => { alert("NO SE PUDO OBTENER LA UBICACIÓN"); });
-            },
+            obtenerGPSCaptura() { App.Utilidades.obtenerGPS('cpSector'); },
 
             // ── Actualiza el campo oculto lugarPlantilla con el compuesto ──
             actualizarLugarCompuesto() {
@@ -6430,7 +6735,7 @@ ${ofics}`;
                 this._descEditada = false;
                 // Limpiar campos del formulario original (los que existen)
                 let fns = (id, v='') => { let el = document.getElementById(id); if(el) el.value = v; };
-                fns('tipoPlantilla'); fns('delitoPlantilla'); fns('lugarPlantilla');
+                fns('tipoPlantilla'); fns('delitoPlantilla'); fns('lugarPlantilla'); App.Utilidades.limpiarAvCa('lugarPlantilla'); App.Utilidades.ocultarMapa('lugarPlantilla');
                 fns('nombrePlantilla'); fns('cedulaPlantilla'); fns('fechaPlantilla');
                 fns('fechaNacimientoPlantilla'); fns('nacionalidadPlantilla');
                 fns('expediente'); fns('numeroUnico'); fns('juzgado');
@@ -7613,6 +7918,18 @@ ${val("consReporAcciones")}
                 this.filtrarPorRango(tInicio, tFin);
             },
 
+            // Vuelta desde Forms: no reinicia el rango ni la tarjeta; muestra la última
+            // consultada con lo que ya estaba cargado y refresca en segundo plano.
+            reanudar() {
+                let vIni = custodiaFechaHoraInicio.value, vFin = custodiaFechaHoraFin.value;
+                if(vIni && vFin && this.registros && this.registros.length) {
+                    this.renderizar();
+                    let tI = new Date(vIni).getTime(), tF = new Date(vFin).getTime();
+                    if(!isNaN(tI) && !isNaN(tF)) this.filtrarPorRango(tI, tF, { silencioso: true });
+                } else {
+                    this.buscar();
+                }
+            },
             buscar() {
                 let ahora = new Date();
                 let rango = App.Modulos.Trabajo.obtenerRangoHorario(ahora);
@@ -8051,7 +8368,7 @@ ${val("consReporAcciones")}
                 // Combinar fecha y hora en datetime-local
                 let dtVal = `${r.fecha || ""}T${r.hora || ""}`;
                 fechaIncidente.value = dtVal;
-                lugar.value = r.lugar || "";
+                lugar.value = r.lugar || ""; App.Modulos.Incidente.sincronizarAvCaDesdeLugar(lugar.value);
                 nombre.value = r.nombre || "";
                 cedula.value = r.cedula || "";
                 // Fecha de nacimiento del imputado (si viene desde Sheets)
@@ -8462,7 +8779,7 @@ ${val("consReporAcciones")}
                 // Combinar fecha y hora en datetime-local
                 let dtVal = `${p.fecha || ""}T${p.hora || ""}`;
                 fechaPlantilla.value = dtVal;
-                lugarPlantilla.value = p.lugar || "";
+                lugarPlantilla.value = p.lugar || ""; App.Utilidades.sincronizarAvCaDesdeLugar("lugarPlantilla", lugarPlantilla.value);
                 nombrePlantilla.value = p.nombre || "";
                 cedulaPlantilla.value = p.cedula || "";
                 nacionalidadPlantilla.value = p.nacionalidad || "";
@@ -8815,14 +9132,14 @@ ${val("consReporAcciones")}
                 document.getElementById("moduloFormsContenedor").style.display = "block";
                 let cont = document.querySelector('.contenedor');
                 if(cont) cont.scrollTop = 0;
-                let filaModo = document.getElementById("filaModoPortapapeles");
-                if(filaModo) filaModo.style.display = (tipo === 'incidente') ? "flex" : "none";
+                let filaModo = document.getElementById("btnModoPortapapeles");
+                if(filaModo) filaModo.style.display = (tipo === 'incidente') ? "" : "none";
                 if(tipo === 'incidente') {
-                    tituloForms.innerHTML = "📋 REGISTRO INCIDENTE";
+                    tituloForms.innerHTML = "REGISTRO INCIDENTE";
                     this.construirLista(this.camposIncidente);
                     this.llenarIncidente();
                 } else {
-                    tituloForms.innerHTML = "📋 PLANTILLA APREHENSIÓN";
+                    tituloForms.innerHTML = "PLANTILLA APREHENSIÓN";
                     this.construirLista(this.camposAprehension);
                     this.llenarAprehension();
                 }
@@ -8856,7 +9173,7 @@ ${val("consReporAcciones")}
                 // Etiqueta del campo 7 según lo que se llenó: DROGA, ARMA, CONTRAVENCIÓN o mezcla
                 let labDroga = document.querySelector("#filaForms4 label");
                 if(labDroga && this.moduloActual === 'incidente') {
-                    labDroga.innerHTML = "7. TIPO Y CANTIDAD DE " + App.Utilidades.etiquetaTipos(items.length > 0, itemsArma.length > 0, itemsContrav.length > 0);
+                    labDroga.innerHTML = '<span class="nf-num">7</span>TIPO Y CANTIDAD DE ' + App.Utilidades.etiquetaTipos(items.length > 0, itemsArma.length > 0, itemsContrav.length > 0);
                 }
 
                 let dtVal = fechaIncidente.value;
@@ -8937,18 +9254,25 @@ ${val("consReporAcciones")}
                 };
                 for(let i in mapVal) { let el = document.getElementById(`datoForms${i}`); if(el && !el.value) el.value = mapVal[i] || ""; }
             },
+            // "12. DESCRIPCIÓN..." -> número en chip + texto
+            etiquetaHtml(et) {
+                let m = /^(\d+)\.\s*(.*)$/.exec(et);
+                return m ? '<span class="nf-num">' + m[1] + '</span>' + m[2] : et;
+            },
             construirLista(campos) {
                 let html = "";
                 let esInc = (this.moduloActual === 'incidente');
                 campos.forEach((campo, i) => {
                     let entrada = "";
-                    let etiqueta = (esInc && this.etiquetasIncidente[campo]) ? this.etiquetasIncidente[campo] : campo;
+                    let etiqueta = this.etiquetaHtml((esInc && this.etiquetasIncidente[campo]) ? this.etiquetasIncidente[campo] : campo);
                     // Campo 12 del Incidente: desplegable, oculto por defecto
                     if(esInc && campo === "DESCRIPCIÓN HECHOS Y DILIGENCIAS") {
-                        html += `<div class="campo campo-forms-fila" id="filaForms${i}"><div class="cab-forms-desplegable"><label>${etiqueta}</label><button type="button" id="btnDesplegarForms" class="btn-desplegar-forms" onclick="App.Modulos.Forms.alternarDescripcion()">▼ VER</button></div><div class="fila-forms-dato" id="cuerpoForms${i}" style="display:none;"><textarea id="datoForms${i}" style="min-height:90px;height:90px;"></textarea><button type="button" class="btn-copiar btn-copiar-lado" onclick="App.Modulos.Forms.copiarSilencioso(${i})" title="COPIAR">📋</button></div></div>`;
+                        html += `<div class="campo campo-forms-fila" id="filaForms${i}"><div class="cab-forms-desplegable"><label>${etiqueta}</label><button type="button" id="btnDesplegarForms" class="btn-desplegar-forms" onclick="App.Modulos.Forms.alternarDescripcion()">▼ VER</button></div><div class="fila-forms-dato" id="cuerpoForms${i}" style="display:none;"><textarea id="datoForms${i}" style="min-height:90px;height:90px;"></textarea></div></div>`;
                         return;
                     }
-                    if(campo === "NACIONALIDAD" || campo === "GRUPO") {
+                    if(campo === "GRUPO") {
+                        entrada = `<input id="datoForms${i}" value="FUERZA DE TAREAS 2">`;
+                    } else if(campo === "NACIONALIDAD") {
                         let source = campo === "NACIONALIDAD" ? App.Data.nacionalidadesBase : App.Data.grupos;
                         let primerValor = (source && source.length) ? source[0] : "";
                         let opts = `<option value="">SELECCIONAR</option>`;
@@ -8963,7 +9287,7 @@ ${val("consReporAcciones")}
                     } else {
                         entrada = `<input id="datoForms${i}">`;
                     }
-                    html += `<div class="campo campo-forms-fila" id="filaForms${i}"><label>${etiqueta}</label><div class="fila-forms-dato">${entrada}<button type="button" class="btn-copiar btn-copiar-lado" onclick="App.Modulos.Forms.copiarSilencioso(${i})" title="COPIAR">📋</button></div></div>`;
+                    html += `<div class="campo campo-forms-fila" id="filaForms${i}"><label>${etiqueta}</label><div class="fila-forms-dato">${entrada}</div></div>`;
                 });
                 if(esInc) html += `<div id="sepForms" style="display:none;height:10px;margin:4px 0 6px;border-bottom:1px dashed #bbb;"></div>`;
                 listaForms.innerHTML = html;
@@ -9019,10 +9343,126 @@ ${val("consReporAcciones")}
                 let soloContravL = !!(inc && inc.itemsContrav && inc.itemsContrav.length && !(inc.itemsDroga || []).length && !(inc.itemsArma || []).length);
                 this.mostrarDescripcion(esArma || soloContravL);
             },
-            copiarSilencioso(id) {
+            // Pausa (ms) entre copia y copia en COPIAR TODO. Si el historial del
+            // portapapeles se salta algún dato, subir este número (ej. 100 o 150).
+            PAUSA_COPIAR_MS: 50,
+            _copiandoTodo: false,
+            _cancelarCopia: false,
+
+            // Copia un texto esperando la confirmación del navegador; si falla, usa respaldo.
+            async copiarTexto(texto) {
+                try {
+                    await navigator.clipboard.writeText(texto);
+                    return true;
+                } catch(e) {
+                    try {
+                        let t = document.createElement("textarea");
+                        t.value = texto;
+                        t.style.position = "fixed";
+                        t.style.opacity = "0";
+                        document.body.appendChild(t);
+                        t.select();
+                        let ok = document.execCommand("copy");
+                        document.body.removeChild(t);
+                        return ok;
+                    } catch(e2) { return false; }
+                }
+            },
+            async copiarSilencioso(id) {
                 let d = document.getElementById(`datoForms${id}`);
-                if(d) {
-                    navigator.clipboard.writeText(d.value);
+                if(!d) return;
+                let ok = await this.copiarTexto(d.value);
+                let btn = d.closest(".fila-forms-dato") && d.closest(".fila-forms-dato").querySelector(".btn-copiar-lado");
+                if(btn) {
+                    btn.textContent = ok ? "✅" : "❌";
+                    btn.classList.toggle("copiado", ok);
+                    setTimeout(() => { btn.textContent = "📋"; btn.classList.remove("copiado"); }, 700);
+                }
+            },
+            // Campos visibles en el orden de pantalla (respeta modo portapapeles,
+            // campo 7 oculto en contravención y campo 12 replegado)
+            camposVisiblesEnPantalla() {
+                let lista = document.getElementById("listaForms");
+                if(!lista) return [];
+                let ids = [];
+                Array.from(lista.children).forEach(fila => {
+                    let m = /^filaForms(\d+)$/.exec(fila.id || "");
+                    if(!m) return;
+                    if(fila.style.display === "none") return;
+                    let n = m[1];
+                    let cuerpo = document.getElementById("cuerpoForms" + n);
+                    if(cuerpo && cuerpo.style.display === "none") return; // campo 12 replegado
+                    ids.push(n);
+                });
+                return ids;
+            },
+            // Copia todos los campos visibles, del último al primero (inverso al orden de
+            // pantalla), uno por uno, para que el historial del portapapeles guarde cada dato aparte.
+            async copiarTodo() {
+                let estado = document.getElementById("estadoCopiarTodo");
+                let lista = this.camposVisiblesEnPantalla().reverse().filter(n => {
+                    let d = document.getElementById("datoForms" + n);
+                    return d && String(d.value || "").trim() !== "";
+                });
+                // Con LLENADO CON PORTAPAPELES activo (Incidente): primero el 4 y el 22 (índices 3 y 8),
+                // y luego el resto en el mismo orden de siempre (27 → 1).
+                if(this.moduloActual === 'incidente' && this.modoPortapapeles) {
+                    let prioridad = ["3", "8"];
+                    let primeros = prioridad.filter(n => lista.includes(n));
+                    lista = [...primeros, ...lista.filter(n => !prioridad.includes(n))];
+                }
+                if(!lista.length) {
+                    if(estado) estado.textContent = "NO HAY DATOS PARA COPIAR";
+                    return { cancelado: false, copiados: 0, fallidos: 0 };
+                }
+                this._copiandoTodo = true;
+                this._cancelarCopia = false;
+                this.actualizarEstadoBoton();
+
+                let copiados = 0, fallidos = 0;
+                for(let k = 0; k < lista.length; k++) {
+                    if(this._cancelarCopia) break;
+                    let n = lista[k];
+                    let d = document.getElementById("datoForms" + n);
+                    let chip = document.querySelector("#filaForms" + n + " .nf-num");
+                    if(estado) estado.textContent = "Copiando " + (chip ? "N.º " + chip.textContent : "campo " + (Number(n) + 1)) + "… (" + (k + 1) + "/" + lista.length + ")";
+                    let ok = await this.copiarTexto(d.value);
+                    if(ok) copiados++; else fallidos++;
+                    if(k < lista.length - 1) await new Promise(r => setTimeout(r, this.PAUSA_COPIAR_MS));
+                }
+                let cancelado = this._cancelarCopia;
+                this._copiandoTodo = false;
+                this._cancelarCopia = false;
+                this.actualizarEstadoBoton();
+                if(cancelado && estado) estado.textContent = "⏹ CANCELADO (" + copiados + " copiados)";
+                return { cancelado, copiados, fallidos };
+            },
+            // LLENAR LINK: copia todos los datos (uno por uno) y luego abre el link de Forms.
+            async llenarLink() {
+                if(this._copiandoTodo) { this._cancelarCopia = true; return; }
+                let r = await this.copiarTodo();
+                if(!r || r.cancelado) return;
+                let estado = document.getElementById("estadoCopiarTodo");
+                this.abrirLink();
+                if(!estado) return;
+                if(this.ventanaForms) {
+                    let txt = r.copiados === 0 && !r.fallidos ? "Forms abierto"
+                        : (r.fallidos ? "⚠️ " + r.copiados + " copiados, " + r.fallidos + " fallaron · Forms abierto"
+                                      : "✅ " + r.copiados + " copiados · Forms abierto");
+                    estado.textContent = txt + ". En Forms no uses «Regresar».";
+                    setTimeout(() => { if(!this._copiandoTodo) estado.textContent = ""; }, 7000);
+                } else {
+                    estado.innerHTML = '⚠️ Datos copiados, pero el navegador bloqueó la ventana. <button type="button" class="btn-abrir-forms" onclick="App.Modulos.Forms.manejarBotonPrincipal()">ABRIR FORMS</button>';
+                }
+            },
+            // Abre (o reutiliza) la pestaña de Forms sin avisos que interrumpan
+            abrirLink() {
+                let url = this.obtenerLink();
+                if(this.ventanaForms && !this.ventanaForms.closed) {
+                    try { this.ventanaForms.location.href = url; } catch(e) {}
+                    this.ventanaForms.focus();
+                } else {
+                    this.ventanaForms = window.open(url, "_blank");
                 }
             },
             obtenerLink() {
@@ -9039,8 +9479,10 @@ ${val("consReporAcciones")}
                 return "https://forms.office.com/r/8EAQQ20WLQ";
             },
             actualizarEstadoBoton() {
-                if(!btnPrincipalExportar) return;
-                btnPrincipalExportar.innerHTML = (this.ventanaForms && !this.ventanaForms.closed) ? "REGRESAR AL LINK" : "EXPORTAR";
+                let b = document.getElementById("btnPrincipalExportar");
+                if(!b) return;
+                b.innerHTML = this._copiandoTodo ? "⏹ CANCELAR" : "🔗 LLENAR LINK";
+                b.classList.toggle("copiando", !!this._copiandoTodo);
             },
             manejarBotonPrincipal() {
                 let url = this.obtenerLink();
@@ -9066,6 +9508,8 @@ ${val("consReporAcciones")}
             volver() {
                 if(this._origenCustodia) {
                     this._origenCustodia = false;
+                    // Regresa a la misma tarjeta y rango que se estaban viendo
+                    App.Modulos.Custodia._retornoDeForms = true;
                     App.UI.mostrar('moduloCadenaCustodia');
                 } else {
                     App.UI.mostrar(this.moduloActual === 'incidente' ? 'moduloDrogas' : 'moduloPlantilla');
@@ -9469,11 +9913,22 @@ window.onload = () => {
         });
         return n;
     }
+    function textoDecomisos(){
+        var out = [];
+        ['listaDrogasGuardadas','listaArmasGuardadas','listaContravGuardadas'].forEach(function(id){
+            var l = document.getElementById(id); if(!l) return;
+            l.querySelectorAll('.itemGuardado:not(.vacio)').forEach(function(d){
+                var t = d.innerHTML.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').trim();
+                if(t) out.push(t);
+            });
+        });
+        return out.join('\n');
+    }
     var resumen = {
         hecho:     function(){ var v = val('lugar'); if(v === 'CARGANDO...') return ['Buscando lugar…', false]; if(v === 'NO SE LOGRA UBICAR') return ['No se logra ubicar', false]; return v ? [v, true] : ['Sin lugar', false]; },
-        decomiso:  function(){ var n = contar(); return n ? [n + (n === 1 ? ' decomiso' : ' decomisos'), true] : ['Sin agregar', false]; },
+        decomiso:  function(){ var t = textoDecomisos(); return t ? [t, true] : ['Sin agregar', false]; },
         imputado:  function(){ var v = val('nombre') || val('cedula'); return v ? [v, true] : ['Sin datos', false]; },
-        oficiales: function(){ var v = val('oficialActuante'); return v ? [v, true] : ['Sin oficial', false]; },
+        oficiales: function(){ var v = [val('oficialActuante'), val('oficialAsistente')].filter(Boolean).join('\n'); return v ? [v, true] : ['Sin oficial', false]; },
         foto:      function(){ var b = document.getElementById('btnDecomiso'); var inc = App.Modulos.Incidente; if(inc._subiendoDecomiso) return ['Subiendo...', false]; var ok = !!(b && b.classList.contains('cargada') && inc.urlDecomiso); return [ok ? 'Listo' : 'Pendiente', ok]; }
     };
     function actualizar(){
@@ -9510,10 +9965,7 @@ window.onload = () => {
         if(abrir){
             card.classList.add('abriendo');
             setTimeout(function(){ card.classList.remove('abriendo'); }, 250);
-            if(card.querySelector('#mapaLugar')) setTimeout(function(){
-                var inc = App.Modulos.Incidente, m = inc && inc._mapa, c = inc && inc._coordsLugar;
-                if(m){ m.invalidateSize(); if(c) m.setView([c.lat, c.lon], m.getZoom()); }
-            }, 60);
+            if(card.querySelector('#mapaLugar')) setTimeout(function(){ App.Utilidades.refrescarMapa('lugar'); }, 60);
             centrar(card);
         }
         actualizar();
@@ -9551,14 +10003,13 @@ window.onload = () => {
         plantilla: function(){ var v = val('tipoPlantilla'); return v ? [v, true] : ['Sin plantilla', false]; },
         imputado:  function(){ var v = val('nombrePlantilla') || val('cedulaPlantilla'); return v ? [v, true] : ['Sin datos', false]; },
         expediente:function(){ var v = val('expediente') || val('numeroUnico'); return v ? [v, true] : ['Sin expediente', false]; },
-        oficiales: function(){ var v = val('plantillaActuante'); return v ? [v, true] : ['Sin oficial', false]; },
+        oficiales: function(){ var v = [val('plantillaActuante'), val('plantillaAsistente')].filter(Boolean).join('\n'); return v ? [v, true] : ['Sin oficial', false]; },
         hechos:    function(){ return val('diligencias') ? ['Con texto', true] : ['Sin texto', false]; },
         grupo:     function(){ var v = val('grupo'); return v ? [v, true] : ['Sin grupo', false]; },
         lugar:     function(){
             var v = val('lugarPlantilla');
             if(v === 'CARGANDO...') return ['Buscando lugar\u2026', false];
             if(v === 'NO SE LOGRA UBICAR') return ['No se logra ubicar', false];
-            v = v.split(',')[0].trim();
             return v ? [v, true] : ['Sin lugar', false];
         }
     };
@@ -9590,6 +10041,7 @@ window.onload = () => {
             card.classList.add('abriendo');
             setTimeout(function(){ card.classList.remove('abriendo'); }, 250);
             setTimeout(function(){ centrar(card); }, 30);
+            if(card.querySelector('#mapaLugarP')) setTimeout(function(){ App.Utilidades.refrescarMapa('lugarPlantilla'); }, 60);
         }
         actualizar();
     }
