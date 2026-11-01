@@ -1963,6 +1963,59 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 #moduloDrogas .din-total { margin-top: 12px; padding: 10px; background: var(--accent-soft); border-radius: 10px; text-align: center; font-weight: 800; color: var(--accent-dark); }
 #moduloDrogas .din-acciones { display: flex; gap: 8px; margin-top: 10px; }
 #moduloDrogas .din-acciones button { flex: 1; margin: 0; height: 46px; border-radius: 10px; font-size: 20px !important; }
+
+/* ===== iPHONE/iPAD: listas desplegables como HOJA INFERIOR (un solo scroll, fuera de .contenedor) ===== */
+html.is-ios .lista-backdrop { background: rgba(0,0,0,0.35); }
+html.is-ios.sheet-abierta .contenedor { overflow: hidden !important; }
+html.is-ios .lista.lista-popup.lista-sheet.mostrar {
+    display: block !important;
+    position: fixed !important;
+    left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+    width: 100% !important; max-width: 100% !important;
+    height: auto !important;
+    max-height: 70vh !important;
+    max-height: 70dvh !important;
+    margin: 0 !important;
+    transform: none !important;
+    border: none !important;
+    border-top: 1px solid #ccc !important;
+    border-radius: 16px 16px 0 0 !important;
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.3) !important;
+    background: #fff !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    padding: 0 0 env(safe-area-inset-bottom, 0px) 0 !important;
+    z-index: 10000 !important;
+    box-sizing: border-box;
+}
+html.is-ios .lista.lista-sheet::before {
+    content: ""; display: block; width: 40px; height: 4px; border-radius: 2px;
+    background: #c4c4c4; margin: 8px auto 4px;
+}
+html.is-ios .lista.lista-sheet > div {
+    padding: 0 16px; min-height: 48px; box-sizing: border-box;
+    display: flex; align-items: center;
+    border-bottom: 1px solid #eee; font-size: 16px; text-transform: uppercase;
+    white-space: normal; word-break: break-word; cursor: pointer;
+}
+html.is-ios .lista.lista-sheet > div:last-child { border-bottom: none; }
+
+/* ===== iOS: scroll táctil nativo en todos los contenedores con scroll interno ===== */
+.contenedor,
+.lista, .lista-interna,
+.listaGuardados,
+#listaAsistentesSeleccionadosPlantilla, #listaUnidadesSeleccionadasPlantilla,
+#moduloElite textarea, #moduloConsolidado textarea {
+    -webkit-overflow-scrolling: touch;
+}
+/* El scroll interno no "arrastra" a la página de atrás (evita el rebote y el salto) */
+.lista, .lista-interna, .listaGuardados,
+#moduloElite textarea, #moduloConsolidado textarea {
+    overscroll-behavior: contain;
+}
 </style>
 </head>
 
@@ -2624,12 +2677,12 @@ body.en-incidente .contenedor { overflow-anchor: none; }
             <button type="button" onclick="App.UI.toggleListaCombo('listaParteLlev')">▼</button>
         </div>
         <div id="listaParteLlev" class="lista">
-            <div onclick="document.getElementById('parteLlev').value='MANO DERECHA'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">MANO DERECHA</div>
-            <div onclick="document.getElementById('parteLlev').value='MANO IZQUIERDA'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">MANO IZQUIERDA</div>
-            <div onclick="document.getElementById('parteLlev').value='BOLSA DERECHA PANTALON'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">BOLSA DERECHA PANTALON</div>
-            <div onclick="document.getElementById('parteLlev').value='BOLSA IZQUIERDA PANTALON'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">BOLSA IZQUIERDA PANTALON</div>
-            <div onclick="document.getElementById('parteLlev').value='BOLSA DERECHA PANTALONETA'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">BOLSA DERECHA PANTALONETA</div>
-            <div onclick="document.getElementById('parteLlev').value='BOLSA IZQUIERDA PANTALONETA'; document.getElementById('listaParteLlev').classList.remove('mostrar'); App.Modulos.Parte.mostrarCampos()">BOLSA IZQUIERDA PANTALONETA</div>
+            <div onclick="document.getElementById('parteLlev').value='MANO DERECHA'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">MANO DERECHA</div>
+            <div onclick="document.getElementById('parteLlev').value='MANO IZQUIERDA'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">MANO IZQUIERDA</div>
+            <div onclick="document.getElementById('parteLlev').value='BOLSA DERECHA PANTALON'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">BOLSA DERECHA PANTALON</div>
+            <div onclick="document.getElementById('parteLlev').value='BOLSA IZQUIERDA PANTALON'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">BOLSA IZQUIERDA PANTALON</div>
+            <div onclick="document.getElementById('parteLlev').value='BOLSA DERECHA PANTALONETA'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">BOLSA DERECHA PANTALONETA</div>
+            <div onclick="document.getElementById('parteLlev').value='BOLSA IZQUIERDA PANTALONETA'; App.UI.cerrarListas(); App.Modulos.Parte.mostrarCampos()">BOLSA IZQUIERDA PANTALONETA</div>
         </div>
     </div>
 
@@ -3974,7 +4027,62 @@ const App = {
             }
             this.cerrarListas();
         },
+        // ===== iPhone/iPad: la lista se muestra como hoja inferior, movida a <body> =====
+        // Así queda fuera de .contenedor (el que hace scroll) y Safari no mezcla los dos scrolls.
+        _esIOS() { return document.documentElement.classList.contains('is-ios'); },
+        _abrirSheet(lista) {
+            if(!lista || !this._esIOS()) return;
+            if(!lista._home) lista._home = { parent: lista.parentNode, next: lista.nextSibling };
+            document.body.appendChild(lista);
+            lista.classList.add('lista-sheet');
+            document.documentElement.classList.add('sheet-abierta');
+        },
+        _cerrarSheets() {
+            document.querySelectorAll('.lista.lista-sheet').forEach(l => {
+                l.classList.remove('lista-sheet');
+                if(l._temporal) { l.remove(); return; }
+                let h = l._home; l._home = null;
+                if(h && h.parent) {
+                    let ref = (h.next && h.next.parentNode === h.parent) ? h.next : null;
+                    h.parent.insertBefore(l, ref);
+                }
+            });
+            document.documentElement.classList.remove('sheet-abierta');
+        },
+        // <select> nativo -> hoja inferior (solo iPhone/iPad), con las mismas opciones
+        abrirSheetSelect(sel) {
+            if(!sel || sel.disabled) return;
+            this.cerrarListas();
+            let hoja = document.createElement('div');
+            hoja.className = 'lista lista-popup lista-sheet mostrar';
+            hoja._temporal = true;
+            Array.from(sel.options).forEach(op => {
+                if(op.hidden) return;
+                let it = document.createElement('div');
+                it.textContent = op.text;
+                if(op.value === sel.value) { it.style.fontWeight = 'bold'; it.style.background = '#e8f0fe'; }
+                it.onclick = () => {
+                    sel.value = op.value;
+                    App.UI.cerrarListas();
+                    sel.dispatchEvent(new Event('input', { bubbles: true }));
+                    sel.dispatchEvent(new Event('change', { bubbles: true }));
+                };
+                hoja.appendChild(it);
+            });
+            document.body.appendChild(hoja);
+            document.documentElement.classList.add('sheet-abierta');
+            let bd = document.createElement('div');
+            bd.id = 'listaBackdrop';
+            bd.className = 'lista-backdrop';
+            const cerrarOnEvent = (e) => { e.preventDefault(); e.stopPropagation(); App.UI.cerrarListas(); };
+            bd.addEventListener('click', cerrarOnEvent, true);
+            bd.addEventListener('touchend', cerrarOnEvent, true);
+            document.body.appendChild(bd);
+            let cur = hoja.querySelector('div[style*="bold"]');
+            if(cur) hoja.scrollTop = Math.max(0, cur.offsetTop - hoja.clientHeight / 2);
+        },
         cerrarListas() {
+            this._cerrarSheets();
             document.querySelectorAll('.lista').forEach(lista => lista.classList.remove('mostrar'));
             let bd = document.getElementById('listaBackdrop');
             if(bd) {
@@ -4013,6 +4121,7 @@ const App = {
                 // En Incidente (página fija) siempre pop-up; en otros módulos también ayuda en pantallas chicas
                 if(document.body.classList.contains('en-incidente') || true) {
                     lista.classList.add('lista-popup');
+                    this._abrirSheet(lista);
                     let bd = document.createElement('div');
                     bd.id = 'listaBackdrop';
                     bd.className = 'lista-backdrop';
@@ -4038,6 +4147,7 @@ const App = {
             if(!yaAbierta) {
                 lista.classList.add('mostrar');
                 lista.classList.add('lista-popup');
+                this._abrirSheet(lista);
                 let bd = document.createElement('div');
                 bd.id = 'listaBackdrop';
                 bd.className = 'lista-backdrop';
@@ -9859,7 +9969,7 @@ window.addEventListener('pagehide', (event) => {
 });
 
 /* ✅ FIX PARA iOS: Detectar iPhone y aplicar clase */
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 if(isIOS) {
     document.documentElement.classList.add('is-ios');
     console.log('📱 iPhone detectado - aplicando fixes de iOS');
@@ -9888,6 +9998,30 @@ if(isIOS) {
                 App.UI.cerrarListas();
             }
         }
+    }, true);
+}
+
+/* iPhone/iPad: todos los <select> (oficiales, drogas, unidades, etc.) usan la misma hoja inferior */
+if(isIOS) {
+    let tSel = null;
+    document.addEventListener('touchstart', (e) => {
+        let s = e.target.closest && e.target.closest('select');
+        if(!s || e.touches.length !== 1) { tSel = null; return; }
+        tSel = { x: e.touches[0].clientX, y: e.touches[0].clientY, s: s };
+    }, { capture: true, passive: true });
+    document.addEventListener('touchend', (e) => {
+        if(!tSel) return;
+        let s = tSel.s, t = e.changedTouches[0];
+        let movio = Math.hypot(t.clientX - tSel.x, t.clientY - tSel.y) > 10;
+        tSel = null;
+        if(movio || s.disabled) return;
+        e.preventDefault();
+        App.UI.abrirSheetSelect(s);
+    }, { capture: true, passive: false });
+    /* iPad con ratón/trackpad */
+    document.addEventListener('mousedown', (e) => {
+        let s = e.target.closest && e.target.closest('select');
+        if(s) { e.preventDefault(); App.UI.abrirSheetSelect(s); }
     }, true);
 }
 
