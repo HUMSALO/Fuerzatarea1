@@ -31,8 +31,7 @@
     --limpiar: #6b7280;
     --borrar: #e53935;
     --modificar: var(--accent);
-    --escaner: var(--accent);
-    --forms: var(--accent);
+        --forms: var(--accent);
     --trabajo: var(--accent);
     --mapa: var(--accent);
     --revertir: var(--accent);
@@ -246,8 +245,7 @@ body.en-incidente .contenedor {
     margin-top: 0 !important;
     box-sizing: border-box;
 }
-#moduloDrogas .btn-mapa,
-#moduloDrogas .btn-camara {
+#moduloDrogas .btn-mapa {
     height: 44px !important;
     width: 44px;
     margin-top: 0 !important;
@@ -343,15 +341,12 @@ button.pulsando { animation: pulsacionBoton 0.28s cubic-bezier(0.34, 1.56, 0.64,
 .limpiar { background: var(--limpiar); color: white; }
 .borrar { background: var(--borrar); color: white; }
 .modificar { background: var(--modificar); color: white; }
-.escaner { background: var(--escaner); color: white; }
 .forms { background: var(--forms); color: white; }
 .trabajo { background: var(--trabajo); color: white; }
 .celeste { background: var(--nav-reportes); color: white; }
 .amarillo { background: #ffc107; color: #333; }
 .btn-mapa { background: var(--mapa); color: white; width: 40px; height: 35px; border-radius: 6px; font-size: 16px; margin-top: 4px; border: 0; }
 .btn-mapa::before { content: "📍"; }
-.btn-camara { background: var(--escaner); color: white; width: 40px; height: 35px; border-radius: 6px; font-size: 16px; margin-top: 4px; border: 0; }
-.btn-camara::before { content: "📷"; }
 .btn-revertir { background: var(--revertir); color: white; display: none; }
 
 .oculto { display: none; }
@@ -479,7 +474,7 @@ button.pulsando { animation: pulsacionBoton 0.28s cubic-bezier(0.34, 1.56, 0.64,
 
 /* ✅ Para iPhone: usar absolute en lugar de fixed para evitar conflictos */
 html.is-ios .lista-backdrop {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -507,9 +502,12 @@ html.is-ios .lista-backdrop {
 
 /* ✅ FIX PARA iOS: Cambiar position si es necesario */
 html.is-ios .lista.lista-popup.mostrar {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
+    position: fixed !important;
+    top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+    margin: auto !important;
+    transform: none !important;
+    height: fit-content !important;
+    overscroll-behavior: contain;
 }
 /* Panel combinado (DROGA+PRESENTACIÓN / TIPO+DELITO): muestra AMBAS partes */
 .panel-droga-presentacion.lista-popup.mostrar {
@@ -524,11 +522,15 @@ html.is-ios .lista.lista-popup.mostrar {
 
 /* ✅ FIX PARA iOS: Posicionamiento correcto */
 html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+    margin: auto !important;
+    transform: none !important;
+    height: fit-content !important;
+    overscroll-behavior: contain;
 }
+html.is-ios .panel-droga-presentacion .lista-interna,
+html.is-ios .lista-popup { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .panel-droga-presentacion.lista-popup.mostrar > .subcampo {
     display: block !important;
     margin-top: 10px !important;
@@ -680,7 +682,6 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
 #moduloPlantilla .combo input,
 #moduloPlantilla .combo button,
 #moduloPlantilla .btn-mapa,
-#moduloPlantilla .btn-camara,
 #moduloPlantilla .btn-icono-guardar {
     height: 44px !important;
     box-sizing: border-box;
@@ -745,33 +746,6 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
 .lista div:hover { background: #f0f0f0; }
 .lista div:last-child { border-bottom: none; }
 
-/* ===== ESCANER ===== */
-.zonaEscaner { width: 100%; height: 250px; overflow: hidden; background: #ddd; border-radius: 6px; margin-top: 8px; position: relative; }
-.zonaEscaner img { max-width: 100%; display: block; }
-.zonaEscanerChica { height: 170px; }
-
-/* Botones N / C / F del escáner de datos */
-.filaBotonesEsc { display: flex; gap: 8px; margin-top: 10px; }
-.filaBotonesEsc button {
-    flex: 1;
-    color: #fff;
-    border: 0;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 0;
-    margin-top: 0;
-}
-.btnEscN { background: var(--accent); }
-.btnEscC { background: var(--accent); }
-.btnEscF { background: var(--accent); }
-.btnEscE { background: var(--accent); }
-
-/* Etiquetas y cuadros de texto del escáner de datos */
-#escNombre { border: 2px solid var(--accent); }
-#escCedula { border: 2px solid var(--accent); }
-#escFecha { border: 2px solid var(--accent); }
-#textoExpediente { border: 2px solid var(--accent); }
 .linea { display: flex; gap: 5px; }
 .linea button { flex: 1; }
 .linea.compacta button { padding: 6px 4px; font-size: 13px; height: 32px; }
@@ -1461,41 +1435,6 @@ html.is-ios .panel-droga-presentacion.lista-popup.mostrar {
 
 /* ===== BOTONES GRANDES DE LA PANTALLA PRINCIPAL ===== */
 
-/* ===== ESCANER: estático, sin título ===== */
-#moduloEscaner h1,
-#moduloExpediente h1 {
-    display: none !important;
-}
-body.en-escaner .contenedor {
-    overflow: hidden !important;
-    overscroll-behavior: none !important;
-}
-#moduloEscaner,
-#moduloExpediente {
-    overflow: hidden;
-    padding-top: 8px;
-}
-
-
-/* Escáner: subir archivo + rotar a la par */
-.fila-escaner-top {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
-}
-.fila-escaner-top input[type="file"] {
-    flex: 1;
-    min-width: 0;
-    margin-top: 0 !important;
-}
-.fila-escaner-top .btn-rotar-escaner {
-    flex-shrink: 0;
-    margin-top: 0 !important;
-    width: auto;
-    padding: 8px 12px;
-    white-space: nowrap;
-}
 
 
 /* Secciones por fondo (sin líneas ----) en Élite y Consolidado */
@@ -1537,10 +1476,6 @@ body.en-incidente .contenedor {
     scroll-padding-bottom: 150px;
 }
 #moduloCadenaCustodia.barra-visible { padding-bottom: 220px; }
-/* Escáner/Expediente: pantalla fija sin scroll, solo deja espacio para la barra de navegación */
-body.en-escaner .contenedor {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
-}
 
 /* ===== CADENA DE CUSTODIA: una tarjeta por pantalla, se desliza con el dedo ===== */
 body.en-custodia .contenedor {
@@ -1710,8 +1645,7 @@ body.en-custodia #moduloCadenaCustodia.barra-visible { padding-bottom: 130px; }
 #moduloDrogas .combo button::after { border-top-color: var(--c, var(--accent)); }
 
 /* Botones 📍 / 📷 */
-#moduloDrogas .btn-mapa,
-#moduloDrogas .btn-camara {
+#moduloDrogas .btn-mapa {
     width: var(--inc-h) !important; height: var(--inc-h) !important;
     border-radius: 10px;
     background: #fff;
@@ -1872,7 +1806,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
                   .decomiso-vista span, .estado-carga) { font-size: 13px !important; }
 #moduloDrogas .listaGuardados * { font-size: 13px !important; }
 #moduloDrogas input::placeholder, #moduloDrogas textarea::placeholder { font-size: 13px !important; }
-#moduloDrogas :is(.btn-mapa, .btn-camara, .btn-guardar-droga, .filaBotonesDroga button) { font-size: 20px !important; }
+#moduloDrogas :is(.btn-mapa, .btn-guardar-droga, .filaBotonesDroga button) { font-size: 20px !important; }
 #moduloDrogas .combo button { font-size: 0 !important; }
 #moduloDrogas :is(.inc-titulo, .inc-resumen, .inc-acciones button, #armaBtnsDoc button) { font-weight: 700 !important; letter-spacing: 0; }
 #moduloDrogas :is(.label-cortes, .decomiso-vista span, #decomisoPlaceholder) { font-weight: 700; }
@@ -1961,8 +1895,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     border-radius: 0 10px 10px 0; height: var(--inc-h) !important; width: 44px; box-shadow: none;
 }
 #panelPlantillaOriginal .combo button::after { border-top-color: var(--accent); }
-#panelPlantillaOriginal .btn-mapa,
-#panelPlantillaOriginal .btn-camara {
+#panelPlantillaOriginal .btn-mapa {
     width: var(--inc-h) !important; height: var(--inc-h) !important; border-radius: 10px;
     background: #fff; border: 1px solid var(--inc-borde); box-shadow: none; flex-shrink: 0;
 }
@@ -1970,7 +1903,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 #panelPlantillaOriginal .linea { margin-top: 16px; padding-bottom: 8px; }
 #panelPlantillaOriginal :is(input, select, textarea, button, label, .itemGuardado, .vacio, .lista div) { font-size: 13px !important; }
 #panelPlantillaOriginal input::placeholder, #panelPlantillaOriginal textarea::placeholder { font-size: 13px !important; color: #9aa3b2; }
-#panelPlantillaOriginal :is(.btn-mapa, .btn-camara, .btn-icono-guardar) { font-size: 20px !important; }
+#panelPlantillaOriginal :is(.btn-mapa, .btn-icono-guardar) { font-size: 20px !important; }
 #panelPlantillaOriginal .combo button { font-size: 0 !important; }
 /* ===== AVENIDA / CALLE: leyenda a la izquierda, cuadro de texto a la derecha ===== */
 .fila-avca { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
@@ -2008,11 +1941,33 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 /* Marca de agua de versión */
 #marcaVersion { position: fixed; top: 4px; right: 8px; z-index: 9999; pointer-events: none;
     font-size: 11px; font-weight: 800; letter-spacing: 0.5px; color: #1f2937; opacity: 0.28; user-select: none; }
+
+/* ===== DINERO (billetes y monedas) ===== */
+#moduloDrogas .din-titulo { margin: 10px 0 4px; font-weight: 700; color: #374151; }
+#moduloDrogas .din-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+#moduloDrogas .din-chip { width: auto; margin: 0; padding: 0 14px; height: 40px; border-radius: 20px; background: #fff; border: 1.5px solid var(--accent); color: var(--accent); font-weight: 700; box-shadow: none; }
+#moduloDrogas .din-chip.activo { background: var(--accent); color: #fff; }
+#moduloDrogas .din-bloque { background: #fff; border: 1px solid var(--inc-borde); border-left: 4px solid var(--accent); border-radius: 12px; padding: 10px; margin-top: 10px; }
+#moduloDrogas .din-bhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+#moduloDrogas .din-btit { font-weight: 800; font-size: 15px !important; }
+#moduloDrogas .din-btit small { font-size: 11px !important; color: #6b7280; margin-left: 4px; }
+#moduloDrogas .din-bdel { width: 36px; height: 36px; margin: 0; padding: 0; border-radius: 50%; background: #fdecea; color: var(--borrar); box-shadow: none; }
+#moduloDrogas .din-sub { margin-top: 8px; font-weight: 700; color: var(--accent); }
+#moduloDrogas .din-sub.falta { color: var(--borrar); }
+#moduloDrogas .din-serie { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+#moduloDrogas .din-serie .din-n { flex: 0 0 22px; font-weight: 700; color: #6b7280; text-align: right; }
+#moduloDrogas .din-serie input { flex: 1; min-width: 0; margin: 0; }
+#moduloDrogas .din-serie.ok input { border-color: var(--success); background: #f1faf4; }
+#moduloDrogas .din-serie.dup input { border-color: var(--borrar); background: #fdecea; }
+#moduloDrogas .din-x { width: 38px; height: 38px; margin: 0; padding: 0; flex-shrink: 0; border-radius: 50%; background: #eee; color: #555; box-shadow: none; }
+#moduloDrogas .din-total { margin-top: 12px; padding: 10px; background: var(--accent-soft); border-radius: 10px; text-align: center; font-weight: 800; color: var(--accent-dark); }
+#moduloDrogas .din-acciones { display: flex; gap: 8px; margin-top: 10px; }
+#moduloDrogas .din-acciones button { flex: 1; margin: 0; height: 46px; border-radius: 10px; font-size: 20px !important; }
 </style>
 </head>
 
 <body>
-<div id="marcaVersion" aria-hidden="true">V15</div>
+<div id="marcaVersion" aria-hidden="true">V17</div>
 <div class="contenedor">
 
 <!-- ================= MÓDULO DATOS ================= -->
@@ -2112,7 +2067,7 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <div class="inc-cuerpo">
     <div class="combo-wrapper">
         <div class="combo">
-            <input id="droga" placeholder="DROGA, ARMA, CONTRAVENCIÓN" oninput="this.value=this.value.toUpperCase(); App.Modulos.Incidente.actualizarPresentacionDinamica(); App.Modulos.Incidente.actualizarSeccionArma();">
+            <input id="droga" placeholder="DROGA, ARMA, DINERO, CONTRAVENCIÓN" oninput="this.value=this.value.toUpperCase(); App.Modulos.Incidente.actualizarPresentacionDinamica(); App.Modulos.Incidente.actualizarSeccionArma();">
             <button type="button" onclick="App.UI.toggleListaCombo('listaDrogasUso')">▼</button>
         </div>
         <div id="listaDrogasUso" class="lista"></div>
@@ -2155,7 +2110,20 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <input id="descripcionArma" placeholder="CARACTERÍSTICAS" style="width:100%;box-sizing:border-box;margin:0;" oninput="this.value=this.value.toUpperCase();">
     </div>
 
-    <div class="fila-cantidad-guardar" style="display:flex; gap:8px; margin-top:8px;">
+    <div id="seccionDinero" style="display:none; margin-top:8px;">
+        <div class="din-titulo">BILLETES</div>
+        <div class="din-chips" id="dinChipsBilletes"></div>
+        <div class="din-titulo">MONEDAS</div>
+        <div class="din-chips" id="dinChipsMonedas"></div>
+        <div id="dinBloques"></div>
+        <div class="din-total" id="dinTotal">TOTAL: ₡0</div>
+        <div class="din-acciones">
+            <button type="button" class="guardar" id="btnGuardarDinero" onclick="App.Modulos.Incidente.guardarDinero()" title="GUARDAR">💾</button>
+            <button type="button" class="borrar" id="btnEliminarDinero" style="display:none;" onclick="App.Modulos.Incidente.eliminarDinero()" title="ELIMINAR">✖</button>
+        </div>
+    </div>
+
+    <div class="fila-cantidad-guardar" id="filaCantGuardar" style="display:flex; gap:8px; margin-top:8px;">
       
 <div class="stepper-cortes" id="stepperCantidadDroga" style="flex: 0 0 50%; margin-top: 0;">
           <button type="button" class="stepper-btn" onmousedown="event.preventDefault()" onclick="App.Modulos.Incidente.decrementarCantidad()">−</button>
@@ -2177,6 +2145,8 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <div id="listaArmasGuardadas" class="listaGuardados" style="display:none; margin-top:6px;"></div>
     <!-- ===== SECCIÓN LISTA DE CONTRAVENCIONES GUARDADAS ===== -->
     <div id="listaContravGuardadas" class="listaGuardados" style="display:none; margin-top:6px;"></div>
+    <!-- ===== LISTA DE DINERO GUARDADO ===== -->
+    <div id="listaDineroGuardado" class="listaGuardados" style="display:none; margin-top:6px;"></div>
 
 </div>
 </section>
@@ -2186,12 +2156,13 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <div class="inc-cuerpo">
     <div class="grupo-lugar">
         <input id="nombre" placeholder="NOMBRE IMPUTADO" oninput="this.value=this.value.toUpperCase()">
-        <button id="btnEscanerIncidente" class="btn-camara" onclick="App.Escaner.abrir('incidente')" title="ESCANEAR DATOS IMPUTADO"></button>
     </div>
 
     <input id="cedula" placeholder="CÉDULA" oninput="this.value=this.value.toUpperCase()">
 
-    <input type="text" id="fechaNacimientoIncidente" placeholder="FECHA NAC. IMPUTADO" oninput="this.value=this.value.toUpperCase()">
+    <input type="text" id="fechaNacimientoIncidente" placeholder="FECHA NAC. (DD/MM/AAAA)" inputmode="numeric" maxlength="10" autocomplete="off" oninput="mascaraFechaNac(event)">
+
+    <textarea id="caracteristicasVestimentaIncidente" rows="2" placeholder="CARACTERÍSTICAS Y VESTIMENTA" autocomplete="off" style="width:100%;box-sizing:border-box;min-height:56px;resize:none;" oninput="this.value=this.value.toUpperCase();"></textarea>
 
 </div>
 </section>
@@ -2243,10 +2214,12 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <div class="fila-avca">
         <label for="avenidaNum">AVENIDA</label>
         <input id="avenidaNum" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
+        <input id="avenidaNum2" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
     </div>
     <div class="fila-avca">
         <label for="calleNum">CALLE</label>
         <input id="calleNum" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
+        <input id="calleNum2" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugar');">
     </div>
 
 <div class="grupo-lugar" style="margin-top:8px;">
@@ -2312,7 +2285,6 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <label style="font-size:12px; color:var(--texto-secundario); margin-top:6px;">NOMBRE</label>
         <div class="grupo-lugar">
             <input id="cpNombre" placeholder="NOMBRE" oninput="this.value=this.value.toUpperCase()">
-            <button id="cpBtnEscaner" class="btn-camara" onclick="App.Escaner.abrir('aprehension')" title="ESCANEAR CÉDULA"></button>
         </div>
 
         <label style="font-size:12px; color:var(--texto-secundario); margin-top:6px;">CÉDULA</label>
@@ -2447,11 +2419,10 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <div class="inc-cuerpo">
         <div class="grupo-lugar">
             <input id="nombrePlantilla" placeholder="NOMBRE IMPUTADO" oninput="this.value=this.value.toUpperCase()">
-            <button id="btnEscanerAprehension" class="btn-camara" onclick="App.Escaner.abrir('aprehension')" title="ESCANEAR DATOS IMPUTADO"></button>
         </div>
 
         <input id="cedulaPlantilla" placeholder="CÉDULA" oninput="this.value=this.value.toUpperCase()">
-        <input type="text" id="fechaNacimientoPlantilla" placeholder="FECHA NAC. IMPUTADO" oninput="this.value=this.value.toUpperCase()">
+        <input type="text" id="fechaNacimientoPlantilla" placeholder="FECHA NAC. (DD/MM/AAAA)" inputmode="numeric" maxlength="10" autocomplete="off" oninput="mascaraFechaNac(event)">
 
         <div class="combo-wrapper">
             <div class="combo">
@@ -2468,7 +2439,6 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <div class="inc-cuerpo">
         <div class="grupo-lugar">
             <input id="expediente" placeholder="EXPEDIENTE" oninput="this.value=this.value.toUpperCase()">
-            <button class="btn-camara" onclick="App.Escaner.abrirExpediente()" title="ESCANEAR EXPEDIENTE"></button>
         </div>
 
         <input id="numeroUnico" placeholder="NÚMERO ÚNICO" oninput="this.value=this.value.toUpperCase()">
@@ -2550,10 +2520,12 @@ body.en-incidente .contenedor { overflow-anchor: none; }
         <div class="fila-avca">
             <label for="avenidaNumP">AVENIDA</label>
             <input id="avenidaNumP" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
+        <input id="avenidaNumP2" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
         </div>
         <div class="fila-avca">
             <label for="calleNumP">CALLE</label>
             <input id="calleNumP" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
+        <input id="calleNumP2" type="text" inputmode="numeric" placeholder="NÚMERO" oninput="this.value=this.value.replace(/\D/g,''); App.Utilidades.componerLugar('lugarPlantilla');">
         </div>
         <div class="grupo-lugar">
             <div class="combo-wrapper" style="flex:1; margin-top:0;">
@@ -3233,57 +3205,6 @@ body.en-incidente .contenedor { overflow-anchor: none; }
     <button class="whatsapp" onclick="App.Modulos.Cortes.Consolidado.enviarWhatsApp()">📲 WHATSAPP</button>
 </div>
 
-<!-- ================= MÓDULO ESCANER ================= -->
-<div id="moduloEscaner" class="oculto">
-    <h1>📷 ESCANEAR DATOS</h1>
-    <div class="fila-escaner-top">
-        <input type="file" id="archivoEscaner" accept="image/*" onchange="App.Escaner.cargarImagen(event, 'imagenEscaner')">
-        <button type="button" class="modificar btn-rotar-escaner" onclick="App.Escaner.rotarImagen('imagenEscaner')">↻ ROTAR</button>
-    </div>
-    <div class="zonaEscaner zonaEscanerChica"><img id="imagenEscaner"></div>
-
-    <div class="filaBotonesEsc">
-        <button class="btnEscN" onclick="App.Escaner.leerCampo('nombre')">N</button>
-        <button class="btnEscC" onclick="App.Escaner.leerCampo('cedula')">C</button>
-        <button class="btnEscF" onclick="App.Escaner.leerCampo('fecha')">F</button>
-    </div>
-
-    <input id="escNombre" placeholder="NOMBRE" style="margin-top:12px;" oninput="this.value=this.value.toUpperCase()">
-
-    <input id="escCedula" placeholder="CÉDULA" oninput="this.value=this.value.toUpperCase()">
-
-    <input id="escFecha" placeholder="FECHA NACIMIENTO" oninput="this.value=this.value.toUpperCase()">
-
-    <div class="linea">
-        <button class="limpiar" onclick="App.Escaner.cerrar()">⬅ VOLVER</button>
-        <button class="guardar" onclick="App.Escaner.aceptar()">ACEPTAR DATOS</button>
-    </div>
-</div>
-
-<!-- ================= ESCANER EXPEDIENTE ================= -->
-<div id="moduloExpediente" class="oculto">
-    <h1>📄 ESCANEAR DATOS</h1>
-    <div class="fila-escaner-top">
-        <input type="file" id="archivoExpediente" accept="image/*" onchange="App.Escaner.cargarImagenExpediente(event)">
-        <button type="button" class="modificar btn-rotar-escaner" onclick="App.Escaner.rotarImagenExpediente()">↻ ROTAR</button>
-    </div>
-    <div class="zonaEscaner zonaEscanerChica"><img id="imagenExpediente"></div>
-
-    <div class="filaBotonesEsc">
-        <button class="btnEscE" onclick="App.Escaner.leerExpediente()">E</button>
-        <button class="btnEscN" onclick="App.Escaner.leerNumeroUnico()">N</button>
-    </div>
-
-    <input id="textoExpediente" placeholder="NÚMERO DE EXPEDIENTE" style="margin-top:12px;" oninput="this.value=this.value.toUpperCase()">
-
-    <input id="textoNumeroUnico" placeholder="NÚMERO ÚNICO" oninput="this.value=this.value.toUpperCase()">
-
-    <div class="linea">
-        <button class="limpiar" onclick="App.Escaner.cerrarExpediente()">⬅ VOLVER</button>
-        <button class="guardar" onclick="App.Escaner.aceptarExpediente()">GUARDAR EXPEDIENTE</button>
-    </div>
-</div>
-
 <!-- ================= MODULO PLANTILLAS FORMS DIRECTO ================= -->
 <div id="moduloFormsContenedor" class="oculto">
     <div class="box">
@@ -3311,49 +3232,45 @@ body.en-incidente .contenedor { overflow-anchor: none; }
 <!-- ================= SCRIPT OPTIMIZADO ===== -->
 <script>
 
-// ===== CARGA DINÁMICA DE LIBRERÍAS DEL ESCÁNER =====
-window._libsEscanerCargadas = false;
-window._libsEscanerCargando = null;
+// ===== MÁSCARA FECHA DE NACIMIENTO (DD/MM/AAAA) =====
+// Pone las "/" solas. Si el primer dígito del día es 4-9 o el del mes es 2-9, completa el 0 (7 -> 07/).
+function mascaraFechaNac(ev) {
+    var el = ev.target;
+    var borrando = ev.inputType && ev.inputType.indexOf('delete') === 0;
+    var d = (el.value || '').replace(/\D/g, '').slice(0, 8);
+    var i = 0, dia = '', mes = '', anio = '', ok;
 
-async function cargarLibreriasEscaner() {
-    if (window._libsEscanerCargadas) return true;
-    if (window._libsEscanerCargando) return window._libsEscanerCargando;
-
-    window._libsEscanerCargando = (async () => {
-        const loadScript = (src) => new Promise((resolve, reject) => {
-            if (document.querySelector(`script[src="${src}"]`)) return resolve();
-            const s = document.createElement("script");
-            s.src = src;
-            s.onload = resolve;
-            s.onerror = () => reject(new Error("No se pudo cargar " + src));
-            document.head.appendChild(s);
-        });
-        const loadCSS = (href) => {
-            if (document.querySelector(`link[href="${href}"]`)) return;
-            const l = document.createElement("link");
-            l.rel = "stylesheet";
-            l.href = href;
-            document.head.appendChild(l);
-        };
-
-        try {
-            loadCSS("https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css");
-            await Promise.all([
-                loadScript("https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"),
-                loadScript("https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js")
-            ]);
-            window._libsEscanerCargadas = true;
-            return true;
-        } catch (e) {
-            console.error("Error cargando librerías del escáner:", e);
-            alert("NO SE PUDIERON CARGAR LAS LIBRERÍAS DEL ESCÁNER. VERIFIQUE SU CONEXIÓN.");
-            return false;
-        } finally {
-            window._libsEscanerCargando = null;
+    // DÍA
+    if (i < d.length) {
+        if (+d[i] > 3) { dia = '0' + d[i]; i++; }
+        else {
+            dia = d[i]; i++;
+            if (i < d.length) {
+                var dd = dia + d[i];
+                if (dd !== '00' && +dd <= 31) { dia = dd; i++; } else { i++; }
+            }
         }
-    })();
+    }
+    // MES
+    if (dia.length === 2 && i < d.length) {
+        if (+d[i] > 1) { mes = '0' + d[i]; i++; }
+        else {
+            mes = d[i]; i++;
+            if (i < d.length) {
+                var mm = mes + d[i];
+                if (mm !== '00' && +mm <= 12) { mes = mm; i++; } else { i++; }
+            }
+        }
+    }
+    // AÑO
+    if (mes.length === 2) anio = d.slice(i, i + 4);
 
-    return window._libsEscanerCargando;
+    var out = dia;
+    if (dia.length === 2 && (mes || !borrando)) out += '/';
+    out += mes;
+    if (mes.length === 2 && (anio || !borrando)) out += '/';
+    out += anio;
+    el.value = out;
 }
 
 
@@ -3415,19 +3332,59 @@ const BuscarLugar = (function() {
         if (p.length === 2) min = Math.hypot((p[1] - lon) * kLon, (p[0] - lat) * kLat);
         return min;
     }
+    // Punto más cercano de una vía al usuario (en metros: x = este, y = norte) y dirección del tramo
+    function puntoCercano(p, lat, lon) {
+        const kLat = 111320, kLon = 111320 * Math.cos(lat * Math.PI / 180);
+        let mejor = { d: Infinity, px: 0, py: 0, ux: 1, uy: 0 };
+        if (p.length === 2) {
+            const px = (p[1] - lon) * kLon, py = (p[0] - lat) * kLat;
+            return { d: Math.hypot(px, py), px, py, ux: 1, uy: 0 };
+        }
+        for (let i = 0; i + 3 < p.length; i += 2) {
+            const ax = (p[i + 1] - lon) * kLon, ay = (p[i] - lat) * kLat;
+            const bx = (p[i + 3] - lon) * kLon, by = (p[i + 2] - lat) * kLat;
+            const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy;
+            const t = l2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2)) : 0;
+            const px = ax + t * dx, py = ay + t * dy, d = Math.hypot(px, py);
+            if (d < mejor.d) { const l = Math.sqrt(l2) || 1; mejor = { d, px, py, ux: dx / l, uy: dy / l }; }
+        }
+        return mejor;
+    }
+
+    const EN_VIA = 30;   // metros: si la vía está a menos de esto, se considera que va "sobre" ella
     function elegirVias(vias, lat, lon) {
         const mejor = { a: null, c: null };
-        vias.forEach(v => {
-            const d = distanciaAVia(v.p, lat, lon);
-            if (d <= MAX_DIST && (!mejor[v.t] || d < mejor[v.t].d)) mejor[v.t] = { n: v.n, d };
-        });
-        return { avenida: mejor.a, calle: mejor.c };
+        const info = vias.map(v => ({ v, g: puntoCercano(v.p, lat, lon) })).filter(x => x.g.d <= MAX_DIST);
+        info.forEach(x => { const k = x.v.t; if (!mejor[k] || x.g.d < mejor[k].d) mejor[k] = { n: x.v.n, d: x.g.d, g: x.g }; });
+        const res = { avenida: mejor.a, calle: mejor.c, avenidas: [], calles: [] };
+        if (mejor.a) res.avenidas = [mejor.a.n];
+        if (mejor.c) res.calles = [mejor.c.n];
+
+        // ¿Va sobre una vía y lejos de las cruces? Entonces busca las dos vías del otro tipo, una a cada lado
+        const dA = mejor.a ? mejor.a.d : Infinity, dC = mejor.c ? mejor.c.d : Infinity;
+        let sobre = null, otro = null;
+        if (dA <= EN_VIA && dC > EN_VIA) { sobre = mejor.a; otro = "c"; }
+        else if (dC <= EN_VIA && dA > EN_VIA) { sobre = mejor.c; otro = "a"; }
+        if (sobre) {
+            const { ux, uy } = sobre.g;
+            let pos = null, neg = null;
+            info.filter(x => x.v.t === otro).forEach(x => {
+                const lado = x.g.px * ux + x.g.py * uy;   // de qué lado de la vía principal queda la cruce
+                const c = { n: x.v.n, d: x.g.d };
+                if (lado >= 0) { if (!pos || c.d < pos.d) pos = c; }
+                else { if (!neg || c.d < neg.d) neg = c; }
+            });
+            if (pos && neg && pos.n !== neg.n) {
+                const dos = [pos.n, neg.n].sort((m, n) => m - n);
+                if (otro === "c") res.calles = dos; else res.avenidas = dos;
+            }
+        }
+        return res;
     }
     function textoLugar(r) {
-        if (r.avenida && r.calle) return `AVENIDA ${r.avenida.n} CALLE ${r.calle.n}`;
-        if (r.avenida) return `AVENIDA ${r.avenida.n}`;
-        if (r.calle) return `CALLE ${r.calle.n}`;
-        return "";
+        const av = r.avenidas && r.avenidas.length ? r.avenidas : (r.avenida ? [r.avenida.n] : []);
+        const ca = r.calles && r.calles.length ? r.calles : (r.calle ? [r.calle.n] : []);
+        return [av.length ? "AVENIDA " + av.join(" Y ") : "", ca.length ? "CALLE " + ca.join(" Y ") : ""].filter(Boolean).join(" ");
     }
     function parsearVias(elementos) {
         const r5 = x => Math.round(x * 1e5) / 1e5;
@@ -3889,7 +3846,7 @@ const App = {
             this.guardarScrollActual();
             // Al salir de Cadena Custodia (ej. botón LINK) se libera el bloqueo de scroll
             document.body.classList.remove('en-custodia');
-            ["moduloDatos", "moduloDrogas", "moduloPlantilla", "moduloTrabajoMenu", "moduloCadenaCustodia", "moduloPropuestas", "moduloCortesMenu", "moduloElite", "moduloConsolidado", "moduloEscaner", "moduloExpediente", "moduloFormsContenedor", "moduloPartePolicialPage"].forEach(id => {
+            ["moduloDatos", "moduloDrogas", "moduloPlantilla", "moduloTrabajoMenu", "moduloCadenaCustodia", "moduloPropuestas", "moduloCortesMenu", "moduloElite", "moduloConsolidado", "moduloFormsContenedor", "moduloPartePolicialPage"].forEach(id => {
                 let el = document.getElementById(id);
                 if(el) el.style.display = "none";
             });
@@ -3899,7 +3856,6 @@ const App = {
             this.ocultarTodo();
             // Bloquea el scroll del contenedor solo en la página de Incidente
             document.body.classList.toggle('en-incidente', id === 'moduloDrogas');
-            document.body.classList.toggle('en-escaner', id === 'moduloEscaner' || id === 'moduloExpediente');
             document.body.classList.toggle('en-custodia', id === 'moduloCadenaCustodia');
             let el = document.getElementById(id);
             el.style.display = (id === 'moduloTrabajoMenu' || id === 'moduloDatos' || id === 'moduloCortesMenu' || id === 'moduloCadenaCustodia') ? "flex" : "block";
@@ -4157,6 +4113,14 @@ const App = {
                     App.Modulos.Incidente.onCambioDroga("ARMA");
                 };
                 lista.appendChild(item);
+                let itemD = document.createElement("div");
+                itemD.innerHTML = "DINERO";
+                itemD.onclick = () => {
+                    document.getElementById("droga").value = "DINERO";
+                    App.UI.cerrarListas();
+                    App.Modulos.Incidente.onCambioDroga("DINERO");
+                };
+                lista.appendChild(itemD);
                 let itemC = document.createElement("div");
                 itemC.innerHTML = "CONTRAVENCIÓN";
                 itemC.onclick = () => {
@@ -4288,10 +4252,11 @@ const App = {
             } catch(e) { return false; }
         },
         // Etiqueta según lo que haya: DROGA, ARMA, CONTRAVENCIÓN, "DROGA Y ARMA", "DROGA, ARMA Y CONTRAVENCIÓN"...
-        etiquetaTipos(hayD, hayA, hayC) {
+        etiquetaTipos(hayD, hayA, hayC, hayE) {
             let a = [];
             if(hayD) a.push("DROGA");
             if(hayA) a.push("ARMA");
+            if(hayE) a.push("EFECTIVO");
             if(hayC) a.push("CONTRAVENCIÓN");
             if(!a.length) return "DROGA, ARMA, CONTRAVENCIÓN";
             if(a.length === 1) return a[0];
@@ -4421,6 +4386,34 @@ const App = {
             if(hayMun) out.push("MUNICIÓN");
             return out;
         },
+        // ===== DINERO (billetes y monedas de Costa Rica) =====
+        DEN_BILLETES: [1000, 2000, 5000, 10000, 20000],
+        DEN_MONEDAS: [25, 50, 100, 500],
+        esDineroNombre(t) { let x = this.sinTildes(t); return x === "DINERO" || x === "EFECTIVO"; },
+        esDineroEnt(d) { return !!(d && (d.esDinero || this.esDineroNombre(d.tipo || d.droga))); },
+        fmtColones(n) { return "₡" + String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, "."); },
+        totalDinero(d) {
+            let t = 0;
+            ((d && d.billetes) || []).forEach(b => { t += (Number(b.den) || 0) * (b.series || []).filter(Boolean).length; });
+            ((d && d.monedas) || []).forEach(m => { t += (Number(m.den) || 0) * (parseInt(m.cant, 10) || 0); });
+            return t;
+        },
+        // Líneas de texto del efectivo: "02 BILLETES ₡2.000 SERIES: A1, A2", "05 MONEDAS ₡100", "TOTAL: ₡X"
+        dineroLineas(d, conTotal) {
+            let p2 = n => String(n).padStart(2, "0"), L = [];
+            ((d && d.billetes) || []).forEach(b => {
+                let s = (b.series || []).filter(Boolean), n = s.length;
+                if(!n) return;
+                L.push(`${p2(n)} ${n > 1 ? "BILLETES" : "BILLETE"} ${this.fmtColones(b.den)} ${n > 1 ? "SERIES" : "SERIE"}: ${s.join(", ")}`);
+            });
+            ((d && d.monedas) || []).forEach(m => {
+                let n = parseInt(m.cant, 10) || 0;
+                if(n <= 0) return;
+                L.push(`${p2(n)} ${n > 1 ? "MONEDAS" : "MONEDA"} ${this.fmtColones(m.den)}`);
+            });
+            if(conTotal) L.push("TOTAL: " + this.fmtColones(this.totalDinero(d)));
+            return L;
+        },
         // Cuando Sheets interpreta la fecha de nacimiento como una fecha real
         // (en vez de texto), Apps Script la devuelve como ISO completo, ej:
         // "1996-01-29T00:00:00.000Z". Esto la deja en "29/01/1996" para
@@ -4500,8 +4493,8 @@ const App = {
         // ===== BUSCAR LUGAR (avenida / calle) con la lógica de BuscarLugar =====
         // Cada campo con mapa y cuadros de avenida/calle se declara aquí.
         CFG: {
-            lugar:          { av: 'avenidaNum',  ca: 'calleNum',  caja: 'mapaLugarCaja',  div: 'mapaLugar',  etq: 'mapaLugarEtq' },
-            lugarPlantilla: { av: 'avenidaNumP', ca: 'calleNumP', caja: 'mapaLugarPCaja', div: 'mapaLugarP', etq: 'mapaLugarPEtq' }
+            lugar:          { av: 'avenidaNum',  av2: 'avenidaNum2',  ca: 'calleNum',  ca2: 'calleNum2',  caja: 'mapaLugarCaja',  div: 'mapaLugar',  etq: 'mapaLugarEtq' },
+            lugarPlantilla: { av: 'avenidaNumP', av2: 'avenidaNumP2', ca: 'calleNumP', ca2: 'calleNumP2', caja: 'mapaLugarPCaja', div: 'mapaLugarP', etq: 'mapaLugarPEtq' }
         },
         _mapas: {},
         obtenerGPS(campo) {
@@ -4572,8 +4565,12 @@ const App = {
             let cfg = this.CFG[campo];
             if(cfg) {
                 let a = document.getElementById(cfg.av), c = document.getElementById(cfg.ca);
-                if(a) a.value = r.avenida ? String(r.avenida.n) : "";
-                if(c) c.value = r.calle ? String(r.calle.n) : "";
+                let a2 = document.getElementById(cfg.av2), c2 = document.getElementById(cfg.ca2);
+                const avs = r.avenidas || [], cas = r.calles || [];
+                if(a) a.value = avs[0] !== undefined ? String(avs[0]) : "";
+                if(a2) a2.value = avs[1] !== undefined ? String(avs[1]) : "";
+                if(c) c.value = cas[0] !== undefined ? String(cas[0]) : "";
+                if(c2) c2.value = cas[1] !== undefined ? String(cas[1]) : "";
                 el.value = campo === 'lugar' ? txt.toUpperCase() : this._armarPlantilla(txt);
             } else {
                 el.value = txt.toUpperCase();
@@ -4587,23 +4584,28 @@ const App = {
             let a = document.getElementById(cfg.av), c = document.getElementById(cfg.ca);
             if(a) a.value = "";
             if(c) c.value = "";
+            let a2 = document.getElementById(cfg.av2), c2 = document.getElementById(cfg.ca2);
+            if(a2) a2.value = "";
+            if(c2) c2.value = "";
         },
         componerLugar(campo) {
             let cfg = this.CFG[campo]; if(!cfg) return;
-            let a = (document.getElementById(cfg.av).value || "").trim();
-            let c = (document.getElementById(cfg.ca).value || "").trim();
+            // Junta los dos cuadros, quita vacíos y repetidos, y ordena de menor a mayor
+            const nums = (id1, id2) => [id1, id2].map(id => { let e = document.getElementById(id); return e ? (e.value || "").trim() : ""; })
+                .filter(v => v !== "").map(Number).filter((n, i, arr) => arr.indexOf(n) === i).sort((x, y) => x - y);
+            let av = nums(cfg.av, cfg.av2), ca = nums(cfg.ca, cfg.ca2);
             this._tokenLugar = (this._tokenLugar || 0) + 1;   // cancela una búsqueda en curso
-            let partes = [a ? "AVENIDA " + a : "", c ? "CALLE " + c : ""].filter(Boolean).join(" ");
+            let partes = [av.length ? "AVENIDA " + av.join(" Y ") : "", ca.length ? "CALLE " + ca.join(" Y ") : ""].filter(Boolean).join(" ");
             document.getElementById(campo).value = campo === 'lugar' ? partes : (partes ? this._armarPlantilla(partes) : "");
             this.refrescarResumenLugar();
         },
         sincronizarAvCaDesdeLugar(campo, texto) {
             let cfg = this.CFG[campo]; if(!cfg) return;
             let t = String(texto || "").toUpperCase();
-            let a = t.match(/AVENIDA\s+(\d+)/), c = t.match(/CALLE\s+(\d+)/);
-            let ea = document.getElementById(cfg.av), ec = document.getElementById(cfg.ca);
-            if(ea) ea.value = a ? a[1] : "";
-            if(ec) ec.value = c ? c[1] : "";
+            let a = t.match(/AVENIDA\s+(\d+)(?:\s+Y\s+(\d+))?/), c = t.match(/CALLE\s+(\d+)(?:\s+Y\s+(\d+))?/);
+            const poner = (id, v) => { let e = document.getElementById(id); if(e) e.value = v || ""; };
+            poner(cfg.av, a && a[1]); poner(cfg.av2, a && a[2]);
+            poner(cfg.ca, c && c[1]); poner(cfg.ca2, c && c[2]);
         },
         // ===== Mapa movible: se puede arrastrar, ampliar, y al tocarlo ubica ahí el punto =====
         async mostrarMapa(campo, lat, lon, prec, manual) {
@@ -5318,6 +5320,226 @@ const App = {
                 })();
             },
 
+            itemsDinero: [],
+            dineroBloques: [],
+            editandoDineroIdx: -1,
+            _dinFmt(n) { return App.Utilidades.fmtColones(n); },
+            _dinBloque(t, den) { return this.dineroBloques.find(b => b.tipo === t && b.den === den); },
+            dineroPendiente() { return this.dineroBloques.some(b => b.cant > 0); },
+            // Antes de enviar/guardar: si quedó un panel de dinero sin guardar, se guarda (o se avisa qué falta)
+            autoGuardarDinero() { if(!this.dineroPendiente()) return true; return this.guardarDinero(); },
+            dineroAEntidad(it) {
+                return {
+                    tipo: "DINERO", presentacion: "EFECTIVO", cantidad: 0, esArma: false, esDinero: true,
+                    billetes: (it.billetes || []).map(b => ({ den: b.den, series: (b.series || []).slice() })),
+                    monedas: (it.monedas || []).map(m => ({ den: m.den, cant: m.cant })),
+                    total: App.Utilidades.totalDinero(it)
+                };
+            },
+            entidadAItemDinero(d) {
+                return {
+                    billetes: (d.billetes || []).map(b => ({ den: Number(b.den), series: (b.series || []).slice() })),
+                    monedas: (d.monedas || []).map(m => ({ den: Number(m.den), cant: parseInt(m.cant, 10) || 0 }))
+                };
+            },
+            renderChipsDinero() {
+                [["B", "dinChipsBilletes", App.Utilidades.DEN_BILLETES], ["M", "dinChipsMonedas", App.Utilidades.DEN_MONEDAS]].forEach(([t, id, dens]) => {
+                    let cont = document.getElementById(id);
+                    if(!cont) return;
+                    cont.innerHTML = "";
+                    dens.forEach(den => {
+                        let b = this._dinBloque(t, den);
+                        let chip = document.createElement("button");
+                        chip.type = "button";
+                        chip.className = "din-chip" + (b ? " activo" : "");
+                        chip.textContent = this._dinFmt(den) + (b ? " · " + b.cant : "");
+                        chip.onclick = () => this.tocarChipDinero(t, den);
+                        cont.appendChild(chip);
+                    });
+                });
+            },
+            tocarChipDinero(t, den) {
+                let b = this._dinBloque(t, den), nuevo = false;
+                if(!b) {
+                    b = { tipo: t, den: den, cant: 1, series: t === "B" ? [""] : [] };
+                    this.dineroBloques.push(b);
+                    nuevo = true;
+                    this.renderDinero();
+                }
+                let el = document.getElementById("dinBloque_" + t + den);
+                setTimeout(() => {
+                    if(el && window._centrarInc) window._centrarInc(el);
+                }, 80);
+            },
+            _dinAjustar(b, n) {
+                b.cant = n;
+                if(b.tipo === "B") {
+                    while(b.series.length < n) b.series.push("");
+                    while(b.series.length > n) {
+                        let i = b.series.lastIndexOf("");
+                        if(i < 0) i = b.series.length - 1;
+                        b.series.splice(i, 1);
+                    }
+                }
+            },
+            cambiarCantDinero(t, den, delta) {
+                let b = this._dinBloque(t, den);
+                if(b) this.setCantDinero(t, den, b.cant + delta);
+            },
+            setCantDinero(t, den, n) {
+                let b = this._dinBloque(t, den);
+                if(!b) return;
+                n = parseInt(n, 10) || 0;
+                if(n <= 0) { this.quitarBloqueDinero(t, den); return; }
+                this._dinAjustar(b, Math.min(n, 500));
+                this.renderDinero();
+            },
+            quitarBloqueDinero(t, den) {
+                let b = this._dinBloque(t, den);
+                if(!b) return;
+                if(b.series.some(Boolean) && !confirm("¿QUITAR ESTE BLOQUE Y SUS SERIES?")) { this.renderDinero(); return; }
+                this.dineroBloques = this.dineroBloques.filter(x => x !== b);
+                this.renderDinero();
+            },
+            quitarSerieDinero(t, den, idx) {
+                let b = this._dinBloque(t, den);
+                if(!b) return;
+                b.series.splice(idx, 1);
+                b.cant = b.series.length;
+                if(b.cant <= 0) this.dineroBloques = this.dineroBloques.filter(x => x !== b);
+                this.renderDinero();
+            },
+            setSerieDinero(t, den, idx, v) {
+                let b = this._dinBloque(t, den);
+                if(!b) return;
+                b.series[idx] = String(v || "").trim().toUpperCase();
+                this.actualizarDinero();
+            },
+            // Cuenta de series usadas (denominación + serie), incluyendo lo ya guardado en otros decomisos de dinero
+            _dinSeriesUsadas() {
+                let c = {};
+                this.dineroBloques.forEach(b => b.series.forEach(s => { if(s) { let k = b.den + "|" + s; c[k] = (c[k] || 0) + 1; } }));
+                (this.itemsDinero || []).forEach((it, i) => {
+                    if(i === this.editandoDineroIdx) return;
+                    (it.billetes || []).forEach(b => (b.series || []).forEach(s => { let k = b.den + "|" + s; c[k] = (c[k] || 0) + 1; }));
+                });
+                return c;
+            },
+            renderDinero() {
+                let cont = document.getElementById("dinBloques");
+                if(!cont) return;
+                let esc = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+                let I = "App.Modulos.Incidente";
+                cont.innerHTML = this.dineroBloques.map(b => {
+                    let k = b.tipo + b.den, a = `'${b.tipo}',${b.den}`;
+                    let series = "";
+                    if(b.tipo === "B") {
+                        series = b.series.map((sv, i) =>
+                            `<div class="din-serie"><span class="din-n">${i + 1}</span>` +
+                            `<input type="text" placeholder="SERIE ${i + 1}" value="${esc(sv)}" autocapitalize="characters" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/\\s/g,''); ${I}.setSerieDinero(${a},${i},this.value)">` +
+                            `<button type="button" class="din-x" title="QUITAR SERIE" onclick="${I}.quitarSerieDinero(${a},${i})">✕</button></div>`
+                        ).join("");
+                    }
+                    return `<div class="din-bloque" id="dinBloque_${k}">` +
+                        `<div class="din-bhead"><span class="din-btit">${this._dinFmt(b.den)}<small>${b.tipo === "B" ? "BILLETES" : "MONEDAS"}</small></span>` +
+                        `<button type="button" class="din-bdel" title="QUITAR BLOQUE" onclick="${I}.quitarBloqueDinero(${a})">✖</button></div>` +
+                        `<div class="stepper-cortes"><button type="button" class="stepper-btn" onmousedown="event.preventDefault()" onclick="${I}.cambiarCantDinero(${a},-1)">−</button>` +
+                        `<input type="number" min="0" step="1" inputmode="numeric" value="${b.cant}" onchange="${I}.setCantDinero(${a},this.value)">` +
+                        `<button type="button" class="stepper-btn" onmousedown="event.preventDefault()" onclick="${I}.cambiarCantDinero(${a},1)">+</button></div>` +
+                        `<div class="din-sub" id="dinSub_${k}"></div>${series}</div>`;
+                }).join("");
+                let bE = document.getElementById("btnEliminarDinero");
+                if(bE) bE.style.display = this.editandoDineroIdx >= 0 ? "" : "none";
+                this.actualizarDinero();
+            },
+            actualizarDinero() {
+                let usadas = this._dinSeriesUsadas(), total = 0;
+                this.dineroBloques.forEach(b => {
+                    let k = b.tipo + b.den, sub = b.cant * b.den;
+                    total += sub;
+                    let el = document.getElementById("dinSub_" + k);
+                    if(el) {
+                        let txt = `${b.cant} × ${this._dinFmt(b.den)} = ${this._dinFmt(sub)}`;
+                        if(b.tipo === "B") {
+                            let n = b.series.filter(Boolean).length;
+                            txt += ` · ${n}/${b.cant} SERIES`;
+                            el.classList.toggle("falta", n < b.cant);
+                        }
+                        el.textContent = txt;
+                    }
+                    if(b.tipo === "B") {
+                        document.querySelectorAll("#dinBloque_" + k + " .din-serie").forEach((row, i) => {
+                            let sv = b.series[i];
+                            row.classList.toggle("ok", !!sv);
+                            row.classList.toggle("dup", !!sv && usadas[b.den + "|" + sv] > 1);
+                        });
+                    }
+                });
+                let t = document.getElementById("dinTotal");
+                if(t) t.textContent = "TOTAL: " + this._dinFmt(total);
+                this.renderChipsDinero();
+            },
+            guardarDinero() {
+                let bl = this.dineroBloques.filter(b => b.cant > 0);
+                if(!bl.length) { alert("AGREGUE AL MENOS UN BILLETE O UNA MONEDA"); return false; }
+                if(bl.some(b => b.tipo === "B" && b.series.some(sv => !sv))) { alert("FALTA ANOTAR LA SERIE DE ALGÚN BILLETE"); return false; }
+                let usadas = this._dinSeriesUsadas();
+                if(Object.keys(usadas).some(k => usadas[k] > 1)) { alert("HAY SERIES REPETIDAS. REVÍSELAS"); return false; }
+                let item = {
+                    billetes: bl.filter(b => b.tipo === "B").sort((x, y) => x.den - y.den).map(b => ({ den: b.den, series: b.series.slice() })),
+                    monedas: bl.filter(b => b.tipo === "M").sort((x, y) => x.den - y.den).map(b => ({ den: b.den, cant: b.cant }))
+                };
+                if(this.editandoDineroIdx >= 0) this.itemsDinero[this.editandoDineroIdx] = item;
+                else this.itemsDinero.push(item);
+                this.limpiarCamposDroga();
+                this.renderListaArmas();
+                return true;
+            },
+            limpiarDineroPanel() {
+                this.dineroBloques = [];
+                this.editandoDineroIdx = -1;
+                this.renderDinero();
+            },
+            renderListaDinero() {
+                let cont = document.getElementById("listaDineroGuardado");
+                if(!cont) return;
+                this.itemsDinero = this.itemsDinero || [];
+                if(!this.itemsDinero.length) { cont.style.display = "none"; cont.innerHTML = ""; return; }
+                cont.style.display = "block";
+                cont.innerHTML = "";
+                this.itemsDinero.forEach((it, idx) => {
+                    let div = document.createElement("div");
+                    div.className = "itemGuardado" + (idx === this.editandoDineroIdx ? " seleccionado" : "");
+                    div.innerHTML = ("EFECTIVO<br>" + App.Utilidades.dineroLineas(it, true).join("<br>")).toUpperCase();
+                    div.onclick = () => this.cargarDineroParaEditar(idx);
+                    cont.appendChild(div);
+                });
+            },
+            cargarDineroParaEditar(idx) {
+                let it = this.itemsDinero[idx];
+                if(!it) return;
+                this.dineroBloques = [
+                    ...(it.billetes || []).map(b => ({ tipo: "B", den: b.den, cant: b.series.length, series: b.series.slice() })),
+                    ...(it.monedas || []).map(m => ({ tipo: "M", den: m.den, cant: m.cant, series: [] }))
+                ];
+                this.editandoDineroIdx = idx;
+                this.editandoIndex = -1;
+                this.editandoEsArma = false;
+                this.editandoEsContrav = false;
+                droga.value = "DINERO";
+                presentacion.value = "";
+                this.actualizarPresentacionDinamica();
+                this.renderDinero();
+                this.renderListaDinero();
+                setTimeout(() => { let p = document.getElementById("seccionDinero"); if(p && window._centrarInc) window._centrarInc(p); }, 120);
+            },
+            eliminarDinero() {
+                if(this.editandoDineroIdx < 0) return;
+                this.itemsDinero.splice(this.editandoDineroIdx, 1);
+                this.limpiarCamposDroga();
+                this.renderListaArmas();
+            },
+
             guardarAsistenteSeleccionado() {
                 let val = oficialAsistente.value.trim();
                 if(!val) { alert("SELECCIONE UN OFICIAL ASISTENTE PRIMERO"); return; }
@@ -5400,6 +5622,11 @@ const App = {
                 let cStr = (cantidadNum && cantidadNum.value ? cantidadNum.value : "1").trim();
                 let num = parseFloat(cStr) || 1;
 
+                if(App.Utilidades.esDineroNombre(d)) {
+                    this.actualizarResumenDrogaPresentacion();
+                    this.actualizarSeccionArma();
+                    return;
+                }
                 let esArma = (d === "ARMA");
                 if(esArma) {
                     // Presentaciones para armas (desde App.Data para incluir NO LETAL)
@@ -5451,6 +5678,19 @@ const App = {
                 let esArma = (d === "ARMA");
                 // Contravención no lleva cantidad: se oculta el selector y el botón guardar ocupa todo el ancho
                 let esContravSel = App.Utilidades.esContravNombre(d);
+                // DINERO: panel de billetes/monedas en lugar de presentación y cantidad
+                let esDin = App.Utilidades.esDineroNombre(d);
+                let panelDin = document.getElementById("seccionDinero");
+                let filaCG = document.getElementById("filaCantGuardar");
+                let wrapPres = presentacion ? presentacion.closest(".combo-wrapper") : null;
+                let dinEraVisible = !!(panelDin && panelDin.style.display === "block");
+                if(panelDin) panelDin.style.display = esDin ? "block" : "none";
+                if(filaCG) filaCG.style.display = esDin ? "none" : "flex";
+                if(wrapPres) wrapPres.style.display = esDin ? "none" : "";
+                if(esDin && !dinEraVisible) {
+                    this.renderDinero();
+                    setTimeout(() => { if(window._centrarInc && panelDin) window._centrarInc(panelDin); }, 180);
+                }
                 let stCant = document.getElementById("stepperCantidadDroga");
                 let zgGuardar = document.getElementById("zonaGuardarDroga");
                 if(stCant) stCant.style.display = esContravSel ? "none" : "";
@@ -5586,7 +5826,7 @@ const App = {
                 }
                 presentacion.value = "";
                 this.actualizarPresentacionDinamica();
-                if(val) setTimeout(() => App.UI.toggleListaCombo('listaPresentacionUso'), 0);
+                if(val && !App.Utilidades.esDineroNombre(val)) setTimeout(() => App.UI.toggleListaCombo('listaPresentacionUso'), 0);
             },
 
             cambiarCantidadValor(delta) {
@@ -5748,7 +5988,8 @@ const App = {
                 let ents = [
                     ...items.map(it => ({ tipo: it.droga || "", presentacion: (it.presentacion || "").toUpperCase(), cantidad: App.Utilidades._cantDec(it.cantidad), esArma: false })),
                     ...armas.map(it => this.armaAEntidad(it)),
-                    ...contravs.map(it => this.contravAEntidad(it))
+                    ...contravs.map(it => this.contravAEntidad(it)),
+                    ...(this.itemsDinero || []).map(it => this.dineroAEntidad(it))
                 ];
                 let asist = this.asistentesSeleccionados.length ? this.asistentesSeleccionados.join("|") : oficialAsistente.value.trim();
                 return {
@@ -5812,6 +6053,7 @@ const App = {
             },
             renderListaArmas() {
                 this.renderListaContrav();
+                this.renderListaDinero();
                 this.actualizarBotonAprehension();
                 this.itemsArma = this.itemsArma || [];
                 let cont = document.getElementById("listaArmasGuardadas");
@@ -5853,6 +6095,7 @@ const App = {
                 this.renderListaArmas();
             },
             limpiarCamposDroga() {
+                this.limpiarDineroPanel();
                 droga.value = ""; presentacion.value = ""; cantidadNum.value = "00";
                 this.editandoIndex = -1;
                 this.editandoEsArma = false;
@@ -5899,6 +6142,7 @@ const App = {
                 // Si la foto de decomiso todavía se está subiendo, se espera a que
                 // termine para que su enlace quede guardado con el incidente.
                 if(this._subiendoDecomiso) { try { await this._subiendoDecomiso; } catch(e) {} }
+                if(!this.autoGuardarDinero()) return;
                 if(this.editandoIdRemoto) { this.guardarEdicion(); return; }
 
                 // Candado anti-doble-envío: si ya hay un guardado en curso
@@ -5958,7 +6202,8 @@ const App = {
                 // Bloque CONTRAVENCIONES: "CONTRAVENCIÓN POR CONSUMO DE LICOR EN VÍA PÚBLICA"
                 let bloquesContrav = itemsContravF.map(it => "TIPO\n" + App.Utilidades.textoContrav(it.presentacion) + (App.Utilidades.descBebidaDe(it) ? "\n" + App.Utilidades.textoBebida(it) : ""));
 
-                let textoDrogas = [...bloquesDrogas, ...bloquesArmas, ...bloquesContrav].join("\n");
+                let bloquesDinero = (this.itemsDinero || []).map(d => "TIPO\nEFECTIVO\n" + App.Utilidades.dineroLineas(d, true).join("\n"));
+                let textoDrogas = [...bloquesDrogas, ...bloquesArmas, ...bloquesDinero, ...bloquesContrav].join("\n");
 
                 let dtVal = fechaIncidente.value;
                 let fecha = dtVal.split("T")[0] || "";
@@ -5969,12 +6214,13 @@ const App = {
                 let todasEntidades = [
                     ...items.map(it => ({ tipo: it.droga || "", presentacion: (it.presentacion || "").toUpperCase(), cantidad: App.Utilidades._cantDec(it.cantidad), esArma: false })),
                     ...itemsArmaFiltrados.map(it => this.armaAEntidad(it)),
-                    ...itemsContravF.map(it => this.contravAEntidad(it))
+                    ...itemsContravF.map(it => this.contravAEntidad(it)),
+                    ...(this.itemsDinero || []).map(it => this.dineroAEntidad(it))
                 ];
                 let drogaJSON = JSON.stringify(todasEntidades);
                 promesasGuardado.push(this.guardarHistorial({
                     tipoReg: "INCIDENTE", fecha: fecha, hora: hora, lugar: lugar.value,
-                    droga: drogaJSON, cantidad: "", presentacion: "", nombre: nombre.value, cedula: cedula.value, fechaNacimiento: fechaNacimientoIncidente.value || "",
+                    droga: drogaJSON, cantidad: "", presentacion: "", nombre: nombre.value, cedula: cedula.value, fechaNacimiento: fechaNacimientoIncidente.value || "", caracteristicasVestimenta: (document.getElementById("caracteristicasVestimentaIncidente")||{}).value || "",
                     oficialActuante: oficialActuante.value, oficialAsistente: asistentePrincipal, asistentesTodos: asistentesTodos, timestamp: Date.now(),
                     urlDecomiso: this.urlDecomiso || ""
                 }));
@@ -6022,6 +6268,7 @@ const App = {
             // Si durante la edición se agregaron drogas adicionales, esas sí
             // se guardan como incidentes nuevos (no reemplazan el original).
             guardarEdicion() {
+                if(!this.autoGuardarDinero()) return;
                 // Solo auto-agrega si hay droga + cantidad > 0 (evita el fantasma "00 MARIHUANA")
                 let cantAuto = parseFloat(cantidadNum.value) || 0;
                 if(droga.value.trim() && (cantAuto > 0 || (App.Utilidades.esContravNombre(droga.value) && presentacion.value.trim()))) {
@@ -6034,7 +6281,7 @@ const App = {
                 });
                 let itemsArmaEdit = (this.itemsArma || []).filter(it => (it.droga || "").trim() && (it.presentacion || "").trim());
                 let itemsContravEdit = (this.itemsContrav || []).filter(it => (it.presentacion || "").trim());
-                if(!items.length && !itemsArmaEdit.length && !itemsContravEdit.length) { alert("AGREGUE AL MENOS UN TIPO DE DROGA, ARMA O CONTRAVENCIÓN"); return; }
+                if(!items.length && !itemsArmaEdit.length && !itemsContravEdit.length && !(this.itemsDinero || []).length) { alert("AGREGUE AL MENOS UN TIPO DE DROGA, ARMA O CONTRAVENCIÓN"); return; }
 
                 let asistentePrincipal = this.asistentesSeleccionados.length ? this.asistentesSeleccionados[0] : oficialAsistente.value.trim();
                 let asistentesTodos = this.asistentesSeleccionados.length ? this.asistentesSeleccionados.join("|") : asistentePrincipal;
@@ -6052,7 +6299,8 @@ const App = {
                 let todasEdicion = [
                     ...items.map(it => ({ tipo: it.droga || "", presentacion: (it.presentacion || "").toUpperCase(), cantidad: App.Utilidades._cantDec(it.cantidad), esArma: false })),
                     ...itemsArmaEdit.map(it => this.armaAEntidad(it)),
-                    ...itemsContravEdit.map(it => this.contravAEntidad(it))
+                    ...itemsContravEdit.map(it => this.contravAEntidad(it)),
+                    ...(this.itemsDinero || []).map(it => this.dineroAEntidad(it))
                 ];
                 let drogaJSON = JSON.stringify(todasEdicion);
 
@@ -6065,7 +6313,7 @@ const App = {
                     consecutivo: consecutivoEditado,
                     fecha: fecha, hora: hora,
                     lugar: lugar.value, droga: drogaJSON, cantidad: "",
-                    nombre: nombre.value, cedula: cedula.value, fechaNacimiento: fechaNacimientoIncidente.value || "",
+                    nombre: nombre.value, cedula: cedula.value, fechaNacimiento: fechaNacimientoIncidente.value || "", caracteristicasVestimenta: (document.getElementById("caracteristicasVestimentaIncidente")||{}).value || "",
                     oficialActuante: oficialActuante.value, oficialAsistente: asistentePrincipal, asistentesTodos: asistentesTodos,
                     ...(this.urlDecomiso ? { urlDecomiso: this.urlDecomiso } : (this._decomisoQuitada ? { urlDecomiso: "" } : {}))
                 }).then(res => {
@@ -6130,9 +6378,11 @@ const App = {
                 this.ocultarMapa(); this.limpiarAvCa();
                 lugar.value = ""; nombre.value = ""; cedula.value = "";
                 fechaNacimientoIncidente.value = "";
+                { let cv = document.getElementById("caracteristicasVestimentaIncidente"); if(cv) cv.value = ""; }
                 this.itemsDroga = [];
                 this.itemsArma = [];
                 this.itemsContrav = [];
+                this.itemsDinero = [];
                 this.editandoEsArma = false;
                 this.editandoEsContrav = false;
                 this.asistentesSeleccionados = [];
@@ -6957,6 +7207,7 @@ ${ofics}`;
             // separado por comas.
             _agruparDrogas(registros) {
                 let acumulado = {};
+                let dineroAcc = [];
 
                 registros.forEach(r => {
                     let drogaJSON = r.droga || "";
@@ -6968,6 +7219,7 @@ ${ofics}`;
                             let drogasArr = JSON.parse(drogaJSON);
                             if (Array.isArray(drogasArr)) {
                                 drogasArr.forEach(d => {
+                                    if(App.Utilidades.esDineroEnt(d)) { dineroAcc.push(d); return; }
                                     let dName = (d.tipo || "").toUpperCase();
                                     let presCruda = (d.presentacion || "").toUpperCase();
                                     let cant = App.Utilidades._cantDec(d.cantidad);
@@ -7011,7 +7263,19 @@ ${ofics}`;
                     }
                 });
 
-                let cats = { MARIHUANA: [], COCAINA: [], CRACK: [], EXTASIS: [], ARMAS_BLANCAS: [], ARMAS_FUEGO: [], ARMAS_NOLETAL: [], OTRAS: [], CONTRAV: [] };
+                let cats = { MARIHUANA: [], COCAINA: [], CRACK: [], EXTASIS: [], ARMAS_BLANCAS: [], ARMAS_FUEGO: [], ARMAS_NOLETAL: [], OTRAS: [], CONTRAV: [], DINERO: [], DINERO_N: 0, DINERO_TOTAL: 0 };
+                // Efectivo: se suman billetes y monedas por denominación
+                if (dineroAcc.length) {
+                    let bi = {}, mo = {}, p2 = n => String(n).padStart(2, "0");
+                    dineroAcc.forEach(d => {
+                        (d.billetes || []).forEach(b => { bi[b.den] = (bi[b.den] || 0) + (b.series || []).filter(Boolean).length; });
+                        (d.monedas || []).forEach(m => { mo[m.den] = (mo[m.den] || 0) + (parseInt(m.cant, 10) || 0); });
+                    });
+                    Object.keys(bi).map(Number).sort((a, b) => a - b).forEach(den => { if (bi[den] > 0) cats.DINERO.push(`${p2(bi[den])} ${bi[den] > 1 ? "BILLETES" : "BILLETE"} ${App.Utilidades.fmtColones(den)}`); });
+                    Object.keys(mo).map(Number).sort((a, b) => a - b).forEach(den => { if (mo[den] > 0) cats.DINERO.push(`${p2(mo[den])} ${mo[den] > 1 ? "MONEDAS" : "MONEDA"} ${App.Utilidades.fmtColones(den)}`); });
+                    cats.DINERO_N = dineroAcc.length;
+                    cats.DINERO_TOTAL = dineroAcc.reduce((t, d) => t + App.Utilidades.totalDinero(d), 0);
+                }
                 Object.values(acumulado).forEach(g => {
                     // Partes contravencionales: "01 PARTE CONTRAVENCIONAL POR ..."
                     if (App.Utilidades.esContravNombre(g.droga)) {
@@ -7616,6 +7880,17 @@ ${val("eliteObservaciones")}`
                     document.getElementById("consOtrasDrogas").value = drogasJornada.OTRAS.join("\n");
                     let elContrav = document.getElementById("consContrav");
                     if (elContrav) elContrav.value = (drogasJornada.CONTRAV || []).map(x => x.linea).join("\n");
+                    // Efectivo decomisado -> OTRO TIPO DE DECOMISOS
+                    if ((drogasJornada.DINERO || []).length) {
+                        let elOtrosN = document.getElementById("consOtrosDec");
+                        let elOtrosT = document.getElementById("consOtrosEspec");
+                        if (elOtrosN) elOtrosN.value = drogasJornada.DINERO_N;
+                        if (elOtrosT) {
+                            elOtrosT.value = ["EFECTIVO:", ...drogasJornada.DINERO, "TOTAL: " + App.Utilidades.fmtColones(drogasJornada.DINERO_TOTAL)].join("\n");
+                            elOtrosT.style.height = "auto";
+                            elOtrosT.style.height = Math.max(36, elOtrosT.scrollHeight) + "px";
+                        }
+                    }
                     document.getElementById("consAprehOtroTxt").value = textoAprehJornada;
 
                     // Contar armas desde drogas de la jornada (se suman con los cortes de Elite ya guardados)
@@ -8170,16 +8445,17 @@ ${val("consReporAcciones")}
                                 // Separar drogas de armas
                                 let soloArmas = drogasArr.filter(d => (d.esArma || (d.tipo||"").toUpperCase() === "ARMA"));
                                 let soloContrav = drogasArr.filter(d => App.Utilidades.esContravEnt(d));
+                                let soloDinero = drogasArr.filter(d => App.Utilidades.esDineroEnt(d));
                                 let bebidas = soloContrav.filter(d => App.Utilidades.descBebidaDe(d));
                                 bebidasTxt = bebidas.map(d => App.Utilidades.descBebidaDe(d)).join(", ");
-                                let soloDrogas = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d));
+                                let soloDrogas = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d));
                                 listaContrav = soloContrav.map(d => App.Utilidades.textoContrav(d.presentacion)).join(", ");
                                 let tiposDroga = [...new Set(soloDrogas.map(d => (d.tipo || "").toUpperCase()))];
                                 conBotonAprehension = soloArmas.some(d => { let P = (d.presentacion || "").toUpperCase().trim(); return P === "DE FUEGO" || P === "NO LETAL"; });
                                 
                                 // DECOMISO DE: ARMA, CARGADOR, MUNICIÓN (solo lo que exista)
                                 let tiposArma = App.Utilidades.tiposArmaDecomiso(soloArmas, "ARMA");
-                                listaTipos = [...tiposDroga, ...tiposArma, ...(bebidas.length ? ["BEBIDA ALCOHÓLICA"] : [])].join(", ");
+                                listaTipos = [...tiposDroga, ...tiposArma, ...(soloDinero.length ? ["EFECTIVO"] : []), ...(bebidas.length ? ["BEBIDA ALCOHÓLICA"] : [])].join(", ");
                                 
                                 let objDroga = soloDrogas.map(d => {
                                     let c = String(d.cantidad || "1").padStart(2, "0");
@@ -8188,8 +8464,8 @@ ${val("consReporAcciones")}
                                 });
                                 
                                 let objArma = soloArmas.map(d => App.Utilidades.armaTextoCC(d));
-                                listaObjetos = [...objDroga, ...objArma, ...bebidas.map(d => App.Utilidades.descBebidaDe(d))].join("<br>");
-                                alertaDocs = soloArmas.map(d => App.Utilidades.armaDocTexto(d)).filter(Boolean).join(", ");
+                                listaObjetos = [...objDroga, ...objArma, ...soloDinero.flatMap(d => App.Utilidades.dineroLineas(d, true)), ...bebidas.map(d => App.Utilidades.descBebidaDe(d))].join("<br>");
+                                alertaDocs = [...soloArmas.map(d => App.Utilidades.armaDocTexto(d)).filter(Boolean), ...soloDinero.map(d => "EFECTIVO " + App.Utilidades.fmtColones(App.Utilidades.totalDinero(d)))].join(", ");
                             }
                         } else {
                             listaTipos = r.droga || "";
@@ -8373,6 +8649,7 @@ ${val("consReporAcciones")}
                 cedula.value = r.cedula || "";
                 // Fecha de nacimiento del imputado (si viene desde Sheets)
                 fechaNacimientoIncidente.value = App.Utilidades.limpiarFechaNacimiento(r.fechaNacimiento || r.fechaNac || r.fecha_nacimiento || "");
+                { let cv = document.getElementById("caracteristicasVestimentaIncidente"); if(cv) cv.value = String(r.caracteristicasVestimenta || r.caracteristicas || "").toUpperCase(); }
                 oficialActuante.value = r.oficialActuante || "";
                 // Cargar oficial asistente (principal) para editar
                 let asistentesArr = (r.asistentesTodos || r.oficialAsistente || "").split(/[|,]/).map(x => x.trim()).filter(Boolean);
@@ -8390,12 +8667,13 @@ ${val("consReporAcciones")}
                     if(drogaJSON.startsWith("[")) {
                         let drogasArr = JSON.parse(drogaJSON);
                         if(Array.isArray(drogasArr)) {
-                            inc.itemsDroga = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d)).map(d => ({
+                            inc.itemsDroga = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d)).map(d => ({
                                 droga: d.tipo || "",
                                 presentacion: d.presentacion || "",
                                 cantidad: String(d.cantidad || "")
                             }));
                             inc.itemsArma = drogasArr.filter(d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA").map(d => inc.entidadAItem(d));
+                            inc.itemsDinero = drogasArr.filter(d => App.Utilidades.esDineroEnt(d)).map(d => inc.entidadAItemDinero(d));
                             inc.itemsContrav = drogasArr.filter(d => App.Utilidades.esContravEnt(d)).map(d => ({ droga: "CONTRAVENCIÓN", presentacion: (d.presentacion || "").toUpperCase(), cantidad: "01", descBebida: App.Utilidades.descBebidaDe(d), descContrav: String(d.descContrav || "").toUpperCase() }));
                         }
                     } else {
@@ -8491,6 +8769,7 @@ ${val("consReporAcciones")}
                         fecha: "D" + (r.fecha || ""), hora: "H" + (r.hora || ""),
                         lugar: r.lugar || "", droga: r.droga || "", cantidad: cantText,
                         nombre: r.nombre || "", cedula: r.cedula || "", fechaNacimiento: App.Utilidades.limpiarFechaNacimiento(r.fechaNacimiento || r.fechaNac || r.fecha_nacimiento || ""),
+                        caracteristicasVestimenta: r.caracteristicasVestimenta || r.caracteristicas || "",
                         oficialActuante: r.oficialActuante || "",
                         oficialAsistente: (r.asistentesTodos || "").split("|")[0] || "",
                         asistentesTodos: r.asistentesTodos || ""
@@ -8527,18 +8806,19 @@ ${val("consReporAcciones")}
                             let arr = JSON.parse(dj);
                             if(Array.isArray(arr)) {
                                 let soloArmas = arr.filter(d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA");
-                                let soloDrogas = arr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d));
+                                let soloDrogas = arr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d));
                                 let tiposDroga = [...new Set(soloDrogas.map(d => (d.tipo||"").toUpperCase()))];
                                 // "Arma" si una sola presentación, "Armas" si varias
                                 let presArmasWA = [...new Set(soloArmas.map(d => (d.presentacion || "").toUpperCase()))];
                                 let textoArmasWA = presArmasWA.length > 1 ? "Armas" : "Arma";
                                 let tiposArmaWA = App.Utilidades.tiposArmaDecomiso(soloArmas, textoArmasWA);
                                 let bebidasWA = arr.filter(d => App.Utilidades.descBebidaDe(d));
-                                deDecomiso = [...tiposDroga, ...tiposArmaWA, ...(bebidasWA.length ? ["Bebida alcohólica"] : [])].join(", ");
+                                let dineroWA = arr.filter(d => App.Utilidades.esDineroEnt(d));
+                                deDecomiso = [...tiposDroga, ...tiposArmaWA, ...(dineroWA.length ? ["Efectivo"] : []), ...(bebidasWA.length ? ["Bebida alcohólica"] : [])].join(", ");
                                 let objD = soloDrogas.map(d => { let c=String(d.cantidad||"1").padStart(2,"0"); let p=(d.presentacion||"").toUpperCase(); return p?`${c} ${p}`:c; });
                                 let objA = soloArmas.map(d => App.Utilidades.armaTextoCC(d));
-                                objeto = [...objD, ...objA, ...bebidasWA.map(d => App.Utilidades.descBebidaDe(d))].join(", ");
-                                alertaWA = soloArmas.map(d => App.Utilidades.armaDocTexto(d)).filter(Boolean).join(", ");
+                                objeto = [...objD, ...objA, ...dineroWA.flatMap(d => App.Utilidades.dineroLineas(d, true)), ...bebidasWA.map(d => App.Utilidades.descBebidaDe(d))].join(", ");
+                                alertaWA = [...soloArmas.map(d => App.Utilidades.armaDocTexto(d)).filter(Boolean), ...dineroWA.map(d => "EFECTIVO " + App.Utilidades.fmtColones(App.Utilidades.totalDinero(d)))].join(", ");
                             }
                         }
                     } catch(e) {}
@@ -8573,6 +8853,10 @@ ${val("consReporAcciones")}
                                 if(esArmaBloque) {
                                     list.forEach(d => {
                                         bloques.push("TIPO\n" + App.Utilidades.armaTextoCompleto(d));
+                                    });
+                                } else if(App.Utilidades.esDineroNombre(dName)) {
+                                    list.forEach(d => {
+                                        bloques.push("TIPO\nEFECTIVO\n" + App.Utilidades.dineroLineas(d, true).join("\n"));
                                     });
                                 } else if(App.Utilidades.esContravNombre(dName)) {
                                     list.forEach(d => {
@@ -8632,6 +8916,8 @@ ${val("consReporAcciones")}
                 if(elCedula) elCedula.value = (r.cedula || "").toUpperCase();
                 let elFechaNac = document.getElementById("fechaNacimientoIncidente");
                 if(elFechaNac) elFechaNac.value = (fechaNacOculta || "").toUpperCase();
+                let elCarac = document.getElementById("caracteristicasVestimentaIncidente");
+                if(elCarac) elCarac.value = String(r.caracteristicasVestimenta || r.caracteristicas || "").toUpperCase();
                 let elActuante = document.getElementById("oficialActuante");
                 if(elActuante) { elActuante.value = (r.oficialActuante || "").toUpperCase(); App.UI.actualizarResumenCampo("resumenActuante","oficialActuante","OFICIAL ACTUANTE"); }
                 let asistente = (r.asistentesTodos || r.oficialAsistente || "").split(/[|,]/)[0].trim();
@@ -8642,22 +8928,24 @@ ${val("consReporAcciones")}
                 inc.itemsDroga = [];
                 inc.itemsArma = [];
                 inc.itemsContrav = [];
+                inc.itemsDinero = [];
                 try {
                     let drogaJSON = r.droga || "";
                     if(drogaJSON.startsWith("[")) {
                         let drogasArr = JSON.parse(drogaJSON);
                         if(Array.isArray(drogasArr)) {
-                            inc.itemsDroga = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d)).map(d => ({
+                            inc.itemsDroga = drogasArr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d)).map(d => ({
                                 droga: (d.tipo || "").toUpperCase(),
                                 presentacion: (d.presentacion || "").toUpperCase(),
                                 cantidad: String(d.cantidad || "1")
                             }));
                             inc.itemsArma = drogasArr.filter(d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA").map(d => inc.entidadAItem(d));
+                            inc.itemsDinero = drogasArr.filter(d => App.Utilidades.esDineroEnt(d)).map(d => inc.entidadAItemDinero(d));
                             inc.itemsContrav = drogasArr.filter(d => App.Utilidades.esContravEnt(d)).map(d => ({ droga: "CONTRAVENCIÓN", presentacion: (d.presentacion || "").toUpperCase(), cantidad: "01", descBebida: App.Utilidades.descBebidaDe(d), descContrav: String(d.descContrav || "").toUpperCase() }));
                         }
                     }
                 } catch(e) { /* continuar con formato antiguo */ }
-                if(!inc.itemsDroga.length && !inc.itemsArma.length && !inc.itemsContrav.length) {
+                if(!inc.itemsDroga.length && !inc.itemsArma.length && !inc.itemsContrav.length && !inc.itemsDinero.length) {
                     let dNames = (r.droga || "").split(",").map(s => s.trim().toUpperCase()).filter(Boolean);
                     let cantParts = (r.cantidad || "").split(",").map(s => s.trim()).filter(Boolean);
                     dNames.forEach((dName, idx) => {
@@ -8873,7 +9161,7 @@ ${val("consReporAcciones")}
                         let arr = JSON.parse(dj);
                         if(Array.isArray(arr)) {
                             let soloArmas = arr.filter(d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA");
-                            let soloDrogas = arr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d));
+                            let soloDrogas = arr.filter(d => !d.esArma && (d.tipo||"").toUpperCase() !== "ARMA" && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d));
                             let partes = [];
                             soloDrogas.forEach(d => {
                                 let c = String(d.cantidad||"1").padStart(2,"0");
@@ -8884,6 +9172,7 @@ ${val("consReporAcciones")}
                             soloArmas.forEach(d => {
                                 partes.push(App.Utilidades.armaTextoCompleto(d));
                             });
+                            arr.filter(d => App.Utilidades.esDineroEnt(d)).forEach(d => partes.push("EFECTIVO " + App.Utilidades.dineroLineas(d, true).join("; ")));
                             arr.filter(d => App.Utilidades.descBebidaDe(d)).forEach(d => partes.push(App.Utilidades.textoBebida(d)));
                             return partes.join(", ");
                         }
@@ -8910,7 +9199,7 @@ ${val("consReporAcciones")}
                 let nacio = (r.nacionalidad || "COSTARRICENSE").toUpperCase();
                 let drog = this._textoDropa(r);
                 // Detectar si el registro trae droga y/o arma (para la frase de la diligencia)
-                this._hayDroga = true; this._hayArma = false; this._soloContrav = false; this._hayBebida = false; this._contravs = [];
+                this._hayDroga = true; this._hayArma = false; this._hayDinero = false; this._soloContrav = false; this._hayBebida = false; this._contravs = [];
                 try {
                     let dj = r.droga || "";
                     if(dj.startsWith("[")) {
@@ -8918,11 +9207,12 @@ ${val("consReporAcciones")}
                         if(Array.isArray(arr)) {
                             let esA = d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA";
                             this._hayArma = arr.some(esA);
-                            this._hayDroga = arr.some(d => !esA(d) && !App.Utilidades.esContravEnt(d));
-                            this._soloContrav = arr.some(d => App.Utilidades.esContravEnt(d)) && !this._hayArma && !this._hayDroga;
+                            this._hayDinero = arr.some(d => App.Utilidades.esDineroEnt(d));
+                            this._hayDroga = arr.some(d => !esA(d) && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d));
+                            this._soloContrav = arr.some(d => App.Utilidades.esContravEnt(d)) && !this._hayArma && !this._hayDroga && !this._hayDinero;
                             this._hayBebida = arr.some(d => App.Utilidades.descBebidaDe(d));
                             this._contravs = arr.filter(d => App.Utilidades.esContravEnt(d)).map(d => ({ tipo: App.Utilidades.tipoContrav(d.presentacion), desc: App.Utilidades.descContravDe(d) }));
-                            if(!this._hayArma && !this._hayDroga && !this._soloContrav) this._hayDroga = true;
+                            if(!this._hayArma && !this._hayDroga && !this._soloContrav && !this._hayDinero) this._hayDroga = true;
                         }
                     }
                 } catch(e) {}
@@ -8998,10 +9288,11 @@ ${val("consReporAcciones")}
                 let docs = hayLicor ? "INFORME POLICIAL Y ACTA DE DESTRUCCION CORRESPONDIENTES" : "INFORME POLICIAL CORRESPONDIENTE";
                 return `ESTANDO EN LABORES PROPIAS DE SEGURIDAD CIUDADANA SE ABORDA A ${nom} CEDULA ${cedu} SE LE REALIZA UNA REVISION SUPERFICIAL POR SEGURIDAD Y NO PORTA NADA, ${lista} ${soloLicor ? "" : "POR LO QUE "}SE CONFECCIONA ${docs} Y SE REMITE A LA AUTORIDAD JUDICIAL RESPECTIVA`;
             },
-            textoDiligencia(nom, cedu, drog, llev, hayD, hayA, omitirLlevVacio, hayB) {
+            textoDiligencia(nom, cedu, drog, llev, hayD, hayA, omitirLlevVacio, hayB, hayE) {
                 let frs = [];
                 if(hayD) frs.push("LA POSIBLE DROGA");
                 if(hayA) frs.push("EL ARMA");
+                if(hayE) frs.push("EL DINERO");
                 if(hayB) frs.push("LA BEBIDA ALCOHÓLICA");
                 if(!frs.length) frs.push("LA POSIBLE DROGA");
                 let fraseDecomisa = frs.length > 1 ? frs.slice(0, -1).join(", ") + " Y " + frs[frs.length - 1] : frs[0];
@@ -9010,7 +9301,7 @@ ${val("consReporAcciones")}
             },
             // Diligencia a partir de un registro (Incidente o Cadena de Custodia)
             diligenciaDesdeRegistro(r) {
-                let hayD = true, hayA = false, soloC = false, hayB = false;
+                let hayD = true, hayA = false, soloC = false, hayB = false, hayE = false;
                 try {
                     let dj = r.droga || "";
                     if(dj.startsWith("[")) {
@@ -9018,15 +9309,16 @@ ${val("consReporAcciones")}
                         if(Array.isArray(arr)) {
                             let esA = d => d.esArma || (d.tipo||"").toUpperCase() === "ARMA";
                             hayA = arr.some(esA);
-                            hayD = arr.some(d => !esA(d) && !App.Utilidades.esContravEnt(d));
-                            soloC = arr.some(d => App.Utilidades.esContravEnt(d)) && !hayA && !hayD;
+                            hayE = arr.some(d => App.Utilidades.esDineroEnt(d));
+                            hayD = arr.some(d => !esA(d) && !App.Utilidades.esContravEnt(d) && !App.Utilidades.esDineroEnt(d));
+                            soloC = arr.some(d => App.Utilidades.esContravEnt(d)) && !hayA && !hayD && !hayE;
                             hayB = arr.some(d => App.Utilidades.descBebidaDe(d));
-                            if(!hayA && !hayD && !soloC) hayD = true;
+                            if(!hayA && !hayD && !soloC && !hayE) hayD = true;
                         }
                     }
                 } catch(e) {}
                 if(soloC) return "";
-                return this.textoDiligencia((r.nombre || "").toUpperCase(), (r.cedula || "").toUpperCase(), this._textoDropa(r), "", hayD, hayA, true, hayB);
+                return this.textoDiligencia((r.nombre || "").toUpperCase(), (r.cedula || "").toUpperCase(), this._textoDropa(r), "", hayD, hayA, true, hayB, hayE);
             },
             autoAltura(el) {
                 el.style.height = "auto";
@@ -9056,7 +9348,7 @@ ${val("consReporAcciones")}
                 let descHechos = `${nom} CEDULA ${cedu} PORTA ${drog} EN LA ${llev}. ESTO EN ${lug} VIA PUBLICA. AL SER LAS ${hor} HORAS DEL ${fech}`;
                 let hayD = this._hayDroga !== false, hayA = !!this._hayArma;
                 let fraseDecomisa = (hayA && hayD) ? "LA POSIBLE DROGA Y EL ARMA" : (hayA ? "EL ARMA" : "LA POSIBLE DROGA");
-                let diligencia = this.textoDiligencia(nom, cedu, drog, llev, hayD, hayA, false, !!this._hayBebida);
+                let diligencia = this.textoDiligencia(nom, cedu, drog, llev, hayD, hayA, false, !!this._hayBebida, !!this._hayDinero);
                 let decomiso   = `SE DECOMISA ${drog}`;
                 // Solo contravención: de momento sin textos (la diligencia se arma a mano)
                 if(this._soloContrav) { descHechos = this.hechosContrav(nom, cedu, lug, hor, fech, this._contravs); diligencia = this.diligenciaContrav(nom, cedu, this._contravs); decomiso = this._hayBebida ? `SE DECOMISA ${drog}` : ""; }
@@ -9097,7 +9389,7 @@ ${val("consReporAcciones")}
         },
 
         Forms: {
-            camposIncidente: ["NOMBRE DEL IMPUTADO", "CÉDULA IMPUTADO", "NACIONALIDAD", "FECHA NACIMIENTO IMPUTADO", "TIPO Y CANTIDAD DE DROGA O ARMA", "DESCRIPCIÓN HECHOS Y DILIGENCIAS", "LUGAR DEL SUCESO", "HORA", "FECHA", "OFICIAL ACTUANTE", "CÉDULA OFICIAL ACTUANTE", "OFICIAL ASISTENTE", "CÉDULA OFICIAL ASISTENTE", "GRUPO"],
+            camposIncidente: ["NOMBRE DEL IMPUTADO", "CÉDULA IMPUTADO", "NACIONALIDAD", "FECHA NACIMIENTO IMPUTADO", "TIPO Y CANTIDAD DE DROGA O ARMA", "DESCRIPCIÓN HECHOS Y DILIGENCIAS", "LUGAR DEL SUCESO", "HORA", "FECHA", "OFICIAL ACTUANTE", "CÉDULA OFICIAL ACTUANTE", "OFICIAL ASISTENTE", "CÉDULA OFICIAL ASISTENTE", "GRUPO", "CARACTERÍSTICAS Y VESTIMENTA"],
             // Numeración del formulario del link (solo Incidente)
             etiquetasIncidente: {
                 "NOMBRE DEL IMPUTADO": "1. NOMBRE DEL IMPUTADO",
@@ -9113,11 +9405,12 @@ ${val("consReporAcciones")}
                 "CÉDULA OFICIAL ACTUANTE": "24. CÉDULA OFICIAL ACTUANTE",
                 "OFICIAL ASISTENTE": "25. OFICIAL ASISTENTE",
                 "CÉDULA OFICIAL ASISTENTE": "26. CÉDULA OFICIAL ASISTENTE",
-                "GRUPO": "27. GRUPO DE TRABAJO AL QUE PERTENECE"
+                "GRUPO": "27. GRUPO DE TRABAJO AL QUE PERTENECE",
+                "CARACTERÍSTICAS Y VESTIMENTA": "6. CARACTERÍSTICAS Y VESTIMENTA"
             },
             // Orden (índices de camposIncidente) con y sin "llenado con portapapeles"
-            ordenNormalIncidente: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
-            ordenPortapapelesIncidente: [3,8,"SEP",0,1,2,4,5,6,7,9,10,11,12,13],
+            ordenNormalIncidente: [0,1,2,3,14,4,5,6,7,8,9,10,11,12,13],
+            ordenPortapapelesIncidente: [3,8,"SEP",0,1,2,14,4,5,6,7,9,10,11,12,13],
             modoPortapapeles: (function(){ try { return localStorage.getItem('formsModoPortapapeles') === '1'; } catch(e) { return false; } })(),
             camposAprehension: ["NOMBRE DEL IMPUTADO", "CÉDULA IMPUTADO", "NACIONALIDAD", "FECHA NACIMIENTO IMPUTADO", "NOMBRE DEL DELITO", "DESCRIPCIÓN DE HECHOS", "TIPO DE CAPTURA", "NÚMERO DE EXPEDIENTE", "ASESOR LEGAL", "LUGAR DEL SUCESO", "FECHA", "HORA", "OFICIAL ACTUANTE", "CÉDULA OFICIAL ACTUANTE", "OFICIAL ASISTENTE", "CÉDULA OFICIAL ASISTENTE", "GRUPO"],
             moduloActual: '',
@@ -9149,6 +9442,7 @@ ${val("consReporAcciones")}
                 let items = App.Modulos.Incidente.itemsDroga || [];
                 let itemsArma = App.Modulos.Incidente.itemsArma || [];
                 let itemsContrav = App.Modulos.Incidente.itemsContrav || [];
+                let itemsDinero = App.Modulos.Incidente.itemsDinero || [];
 
                 // Formato para el link/Forms:
                 // Drogas: "01 PUCHO MARIHUANA,01 PUCHO MARIHUANA"
@@ -9165,15 +9459,16 @@ ${val("consReporAcciones")}
                 });
                 let lineasArma = itemsArma.map(it => App.Utilidades.armaTextoCompleto(it));
                 let lineasContrav = itemsContrav.map(it => App.Utilidades.textoContrav(it.presentacion));
-                let soloContravF = itemsContrav.length > 0 && !items.length && !itemsArma.length;
-                let textoDroga = soloContravF ? "" : [...lineasDroga, ...lineasArma, ...lineasContrav].join(",");
+                let lineasDinero = itemsDinero.map(d => "EFECTIVO " + App.Utilidades.dineroLineas(d, true).join("; "));
+                let soloContravF = itemsContrav.length > 0 && !items.length && !itemsArma.length && !itemsDinero.length;
+                let textoDroga = soloContravF ? "" : [...lineasDroga, ...lineasArma, ...lineasDinero, ...lineasContrav].join(",");
                 let fila7 = document.getElementById("filaForms4");
                 if(fila7 && this.moduloActual === 'incidente') fila7.style.display = soloContravF ? "none" : "";
 
                 // Etiqueta del campo 7 según lo que se llenó: DROGA, ARMA, CONTRAVENCIÓN o mezcla
                 let labDroga = document.querySelector("#filaForms4 label");
                 if(labDroga && this.moduloActual === 'incidente') {
-                    labDroga.innerHTML = '<span class="nf-num">7</span>TIPO Y CANTIDAD DE ' + App.Utilidades.etiquetaTipos(items.length > 0, itemsArma.length > 0, itemsContrav.length > 0);
+                    labDroga.innerHTML = '<span class="nf-num">7</span>TIPO Y CANTIDAD DE ' + App.Utilidades.etiquetaTipos(items.length > 0, itemsArma.length > 0, itemsContrav.length > 0, itemsDinero.length > 0);
                 }
 
                 let dtVal = fechaIncidente.value;
@@ -9195,14 +9490,15 @@ ${val("consReporAcciones")}
                     10: App.Utilidades.obtenerCedulaOficial(oficialActuante.value),
                     11: oficialAsistente.value, 
                     12: App.Utilidades.obtenerCedulaOficial(oficialAsistente.value),
-                    13: grupo.value
+                    13: grupo.value,
+                    14: (document.getElementById("caracteristicasVestimentaIncidente") || {}).value || ""
                 };
                 for(let i in mapVal) { let el = document.getElementById(`datoForms${i}`); if(el && !el.value) el.value = mapVal[i] || ""; }
             },
             // Mismo texto de "DILIGENCIA POLICIAL" del módulo Parte, con MANO DERECHA predeterminado
             diligenciaIncidente(items, itemsArma, itemsContrav) {
                 // Solo contravención: diligencia propia según el tipo (licor, alteración, ofensas)
-                if((itemsContrav || []).length && !(items || []).length && !(itemsArma || []).length) {
+                if((itemsContrav || []).length && !(items || []).length && !(itemsArma || []).length && !(App.Modulos.Incidente.itemsDinero || []).length) {
                     return App.Modulos.Parte.diligenciaContrav(
                         (nombre.value || "").toUpperCase(), (cedula.value || "").toUpperCase(),
                         itemsContrav.map(it => ({ tipo: App.Utilidades.tipoContrav(it.presentacion), desc: App.Utilidades.descContravDe(it) }))
@@ -9216,16 +9512,18 @@ ${val("consReporAcciones")}
                     partes.push(pr === "GRAMOS" ? `${c} GRAMOS DE ${t}` : (pr ? `${c} ${pr} DE ${t}` : `${c} ${t}`));
                 });
                 (itemsArma || []).forEach(it => partes.push(App.Utilidades.armaTextoCompleto(it)));
+                (App.Modulos.Incidente.itemsDinero || []).forEach(d => partes.push("EFECTIVO " + App.Utilidades.dineroLineas(d, true).join("; ")));
                 let bebidasD = (itemsContrav || []).filter(it => App.Utilidades.descBebidaDe(it));
                 bebidasD.forEach(it => partes.push(App.Utilidades.textoBebida(it)));
                 let hayA = !!(itemsArma && itemsArma.length);
-                let hayD = !!(items && items.length) || !hayA;
+                let hayE = !!((App.Modulos.Incidente.itemsDinero || []).length);
+                let hayD = !!(items && items.length) || (!hayA && !hayE);
                 return App.Modulos.Parte.textoDiligencia(
                     (nombre.value || "").toUpperCase(),
                     (cedula.value || "").toUpperCase(),
                     partes.join(", "),
                     "MANO DERECHA",
-                    hayD, hayA, false, bebidasD.length > 0
+                    hayD, hayA, false, bebidasD.length > 0, hayE
                 );
             },
             llenarAprehension() {
@@ -9241,7 +9539,7 @@ ${val("consReporAcciones")}
                     4: delitoPlantilla.value, 
                     5: diligencias.value, 
                     6: tipoPlantilla.value, 
-                    7: expediente.value || App.Escaner.expedienteEscaneado,
+                    7: expediente.value,
                     8: asesor.value, 
                     9: lugarPlantilla.value, 
                     10: fecha, 
@@ -9282,7 +9580,7 @@ ${val("consReporAcciones")}
                         });
                         // El input se precarga con el primer valor de la lista
                         entrada = `<div class="nacionalidad" style="flex:1;min-width:0;"><input id="datoForms${i}" value="${primerValor}"><select onchange="document.getElementById('datoForms${i}').value=this.value">${opts}</select></div>`;
-                    } else if(campo === "DESCRIPCIÓN DE HECHOS") {
+                    } else if(campo === "DESCRIPCIÓN DE HECHOS" || campo === "CARACTERÍSTICAS Y VESTIMENTA") {
                         entrada = `<textarea id="datoForms${i}" style="min-height:48px;height:48px;"></textarea>`;
                     } else {
                         entrada = `<input id="datoForms${i}">`;
@@ -9516,293 +9814,6 @@ ${val("consReporAcciones")}
                 }
             }
         }
-    },
-
-    Escaner: {
-        cropper: null,
-        cropperExpediente: null,
-        modoActual: '',
-        expedienteEscaneado: '',
-
-        async abrir(mod) {
-            const ok = await cargarLibreriasEscaner();
-            if (!ok) return;
-            this.modoActual = mod;
-            App.UI.ocultarTodo();
-            App.UI._moduloActual = "moduloEscaner";
-            document.body.classList.remove('en-incidente');
-            document.body.classList.add('en-escaner');
-            document.getElementById("moduloEscaner").style.display = "block";
-            let cont = document.querySelector('.contenedor');
-            if(cont) cont.scrollTop = 0;
-            escNombre.value = ""; escCedula.value = ""; escFecha.value = "";
-            let img = document.getElementById("imagenEscaner");
-            img.src = "";
-            let fileInput = document.getElementById("archivoEscaner");
-            if(fileInput) fileInput.value = "";
-            if(this.cropper) { this.cropper.destroy(); this.cropper = null; }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        },
-        async abrirExpediente() {
-            const ok = await cargarLibreriasEscaner();
-            if (!ok) return;
-            App.UI.ocultarTodo();
-            App.UI._moduloActual = "moduloExpediente";
-            document.body.classList.remove('en-incidente');
-            document.body.classList.add('en-escaner');
-            document.getElementById("moduloExpediente").style.display = "block";
-            let cont = document.querySelector('.contenedor');
-            if(cont) cont.scrollTop = 0;
-            textoExpediente.value = "";
-            let img = document.getElementById("imagenExpediente");
-            img.src = "";
-            let fileInput = document.getElementById("archivoExpediente");
-            if(fileInput) fileInput.value = "";
-            if(this.cropperExpediente) { this.cropperExpediente.destroy(); this.cropperExpediente = null; }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        },
-        cerrar() {
-            if(this.cropper) { this.cropper.destroy(); this.cropper = null; }
-            document.body.classList.remove('en-escaner');
-            App.UI.mostrar(this.modoActual === 'incidente' ? 'moduloDrogas' : 'moduloPlantilla');
-        },
-        cerrarExpediente() {
-            if(this.cropperExpediente) { this.cropperExpediente.destroy(); this.cropperExpediente = null; }
-            document.body.classList.remove('en-escaner');
-            App.UI.mostrar('moduloPlantilla');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        },
-        
-        cargarImagen(event, imgElementId) {
-            let file = event.target.files[0];
-            if (!file) return;
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                let image = document.getElementById(imgElementId);
-                image.src = e.target.result;
-                this.inicializarCropper(imgElementId, false);
-                // Sin scroll automático: pantalla estática
-            };
-            reader.readAsDataURL(file);
-        },
-
-        cargarImagenExpediente(event) {
-            let file = event.target.files[0];
-            if (!file) return;
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                let image = document.getElementById("imagenExpediente");
-                image.src = e.target.result;
-                this.inicializarCropper("imagenExpediente", true);
-                // Sin scroll automático: pantalla estática
-            };
-            reader.readAsDataURL(file);
-        },
-
-        rotarImagen(imgElementId) {
-            if(this.cropper) {
-                this.cropper.rotate(90);
-            }
-        },
-
-        rotarImagenExpediente() {
-            if(this.cropperExpediente) {
-                this.cropperExpediente.rotate(90);
-            }
-        },
-
-        inicializarCropper(imgElementId, isExpediente = false) {
-            let image = document.getElementById(imgElementId);
-            if(isExpediente) {
-                if(this.cropperExpediente) this.cropperExpediente.destroy();
-                this.cropperExpediente = new Cropper(image, {
-                    aspectRatio: NaN,
-                    viewMode: 1,
-                    dragMode: 'move',
-                    autoCropArea: 0.3,
-                    responsive: true,
-                    restore: true,
-                    guides: true,
-                    center: true,
-                    highlight: false,
-                    cropBoxMovable: true,
-                    cropBoxResizable: true,
-                    toggleDragModeOnDblclick: false,
-                });
-            } else {
-                if(this.cropper) this.cropper.destroy();
-                this.cropper = new Cropper(image, {
-                    aspectRatio: NaN,
-                    viewMode: 1,
-                    dragMode: 'move',
-                    autoCropArea: 0.3,
-                    responsive: true,
-                    restore: true,
-                    guides: true,
-                    center: true,
-                    highlight: false,
-                    cropBoxMovable: true,
-                    cropBoxResizable: true,
-                    toggleDragModeOnDblclick: false,
-                });
-            }
-        },
-
-        // Busca etiquetas conocidas de la cédula (NOMBRE, APELLIDO, etc.) dentro del texto OCR
-        // y devuelve el fragmento de texto que sigue a cada etiqueta hasta la próxima etiqueta.
-        extraerCamposPorEtiqueta(textoOriginal) {
-            let texto = textoOriginal.toUpperCase();
-            // Más variantes comunes en cédulas costarricenses y documentos
-            let etiquetas = [
-                'PRIMER APELLIDO', 'SEGUNDO APELLIDO', 'APELLIDOS', 'APELLIDO',
-                'NOMBRE COMPLETO', 'NOMBRES', 'NOMBRE',
-                'NUMERO DE CEDULA', 'NÚMERO DE CÉDULA', 'N° DE CÉDULA', 'N DE CEDULA',
-                'IDENTIFICACION', 'IDENTIFICACIÓN', 'CEDULA', 'CÉDULA',
-                'FECHA DE NACIMIENTO', 'FECHA NACIMIENTO', 'FECHA NAC', 'F. NACIMIENTO', 'FECHA'
-            ];
-            let regexEtiquetas = new RegExp(etiquetas.join('|'), 'g');
-            let posiciones = [];
-            let match;
-            while ((match = regexEtiquetas.exec(texto)) !== null) {
-                posiciones.push({ etiqueta: match[0], inicio: match.index, fin: match.index + match[0].length });
-            }
-            // Ordenar por posición para no mezclar valores
-            posiciones.sort((a, b) => a.inicio - b.inicio);
-            let valores = {};
-            for (let i = 0; i < posiciones.length; i++) {
-                let inicioValor = posiciones[i].fin;
-                let finValor = (i + 1 < posiciones.length) ? posiciones[i + 1].inicio : texto.length;
-                let valor = texto.slice(inicioValor, finValor)
-                    .replace(/[:=%\-_.]/g, ' ')
-                    .replace(/\s+/g, ' ')
-                    .trim();
-                let key = posiciones[i].etiqueta;
-                if (!valores[key]) valores[key] = valor; else valores[key] += ' ' + valor;
-            }
-            return valores;
-        },
-
-        leerCampo(campo) {
-            if(!this.cropper) { alert("POR FAVOR CARGUE UNA IMAGEN PRIMERO"); return; }
-            let canvas = this.cropper.getCroppedCanvas();
-            if(!canvas) { alert("SELECCIONE UN ÁREA VÁLIDA EN LA IMAGEN"); return; }
-            
-            let btnActivo = event.target;
-            let letraOriginal = btnActivo.innerText;
-            btnActivo.innerText = "ESCANEANDO...";
-            
-            Tesseract.recognize(canvas.toDataURL(), 'spa', {
-                logger: m => {}
-            }).then(({ data: { text } }) => {
-                btnActivo.innerText = letraOriginal;
-                console.log("TEXTO CRUDO OCR:", text); // Para depuración: revisa la consola del navegador si algo sigue fallando
-                let limpio = text.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
-                let campos = this.extraerCamposPorEtiqueta(text);
-                
-                if(campo === 'nombre') {
-                    let apellidos = campos['PRIMER APELLIDO'] || campos['APELLIDOS'] || campos['APELLIDO'] || '';
-                    let segundoApellido = campos['SEGUNDO APELLIDO'] || '';
-                    let nombreSolo = campos['NOMBRE'] || '';
-                    let nombreCompleto = [apellidos, segundoApellido, nombreSolo].filter(Boolean).join(' ');
-                    // Si no se detectó ninguna etiqueta, cae de vuelta al texto completo limpio
-                    if(!nombreCompleto.trim()) nombreCompleto = limpio;
-                    nombreCompleto = nombreCompleto
-                        .replace(/[^A-ZÁÉÍÓÚÑ\s]/g, '')
-                        .replace(/\s+/g, ' ')
-                        .trim();
-                    escNombre.value = nombreCompleto;
-                } else if(campo === 'cedula') {
-                    let fuente = campos['NUMERO DE CEDULA'] || campos['NÚMERO DE CÉDULA'] || campos['N° DE CÉDULA'] ||
-                                 campos['N DE CEDULA'] || campos['IDENTIFICACION'] || campos['IDENTIFICACIÓN'] ||
-                                 campos['CEDULA'] || campos['CÉDULA'] || limpio;
-                    // Formato típico CR: 1-2345-6789 o 01-0234-0567 o solo dígitos
-                    let matchCed = fuente.match(/\b\d{1,2}[-\s]?\d{3,4}[-\s]?\d{3,4}\b/) || fuente.match(/\b\d{9,12}\b/);
-                    if (matchCed) {
-                        escCedula.value = matchCed[0].replace(/[-\s]/g, '');
-                    } else {
-                        escCedula.value = fuente.replace(/[^0-9]/g, '').slice(0, 12);
-                    }
-                } else if(campo === 'fecha') {
-                    let fuente = campos['FECHA DE NACIMIENTO'] || campos['FECHA NAC'] || campos['FECHA'] || limpio;
-                    let matchFecha = fuente.match(/\d{2}[\/\-]\d{2}[\/\-]\d{4}/) || limpio.match(/\d{2}[\/\-]\d{2}[\/\-]\d{4}/);
-                    escFecha.value = matchFecha ? matchFecha[0] : fuente.trim();
-                }
-            }).catch(() => {
-                btnActivo.innerText = letraOriginal;
-                alert("ERROR AL LEER EL TEXTO");
-            });
-        },
-
-        leerExpediente() {
-            if(!this.cropperExpediente) { alert("POR FAVOR CARGUE UNA IMAGEN PRIMERO"); return; }
-            let canvas = this.cropperExpediente.getCroppedCanvas();
-            if(!canvas) { alert("SELECCIONE UN ÁREA VÁLIDA EN LA IMAGEN"); return; }
-            
-            let btnActivo = event.target;
-            let letraOriginal = btnActivo.innerText;
-            btnActivo.innerText = "ESCANEANDO...";
-            
-            Tesseract.recognize(canvas.toDataURL(), 'spa', {
-                logger: m => {}
-            }).then(({ data: { text } }) => {
-                btnActivo.innerText = letraOriginal;
-                let limpio = text.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
-                textoExpediente.value = limpio;
-            }).catch(() => {
-                btnActivo.innerText = letraOriginal;
-                alert("ERROR AL LEER EL EXPEDIENTE");
-            });
-        },
-
-        leerNumeroUnico() {
-            if(!this.cropperExpediente) { alert("POR FAVOR CARGUE UNA IMAGEN PRIMERO"); return; }
-            let canvas = this.cropperExpediente.getCroppedCanvas();
-            if(!canvas) { alert("SELECCIONE UN ÁREA VÁLIDA EN LA IMAGEN"); return; }
-            
-            let btnActivo = event.target;
-            let letraOriginal = btnActivo.innerText;
-            btnActivo.innerText = "ESCANEANDO...";
-            
-            Tesseract.recognize(canvas.toDataURL(), 'spa', {
-                logger: m => {}
-            }).then(({ data: { text } }) => {
-                btnActivo.innerText = letraOriginal;
-                let limpio = text.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
-                // Busca patrones de números (pueden ser varios formatos)
-                let matchNumero = limpio.match(/\b\d{5,20}\b/);
-                textoNumeroUnico.value = matchNumero ? matchNumero[0] : limpio.replace(/[^0-9A-Z\s]/g, '').trim();
-            }).catch(() => {
-                btnActivo.innerText = letraOriginal;
-                alert("ERROR AL LEER EL NÚMERO ÚNICO");
-            });
-        },
-
-        aceptar() {
-            let n = escNombre.value.trim();
-            let c = escCedula.value.trim();
-            let f = escFecha.value.trim();
-
-            if(this.modoActual === 'incidente') {
-                if(n) nombre.value = n;
-                if(c) cedula.value = c;
-                if(f) fechaNacimientoIncidente.value = f;
-            } else {
-                if(n) nombrePlantilla.value = n;
-                if(c) cedulaPlantilla.value = c;
-                if(f) fechaNacimientoPlantilla.value = f;
-            }
-            this.cerrar();
-        },
-
-        aceptarExpediente() {
-            let val = textoExpediente.value.trim();
-            let valNumero = textoNumeroUnico.value.trim();
-            if(!val) { alert("NO HAY EXPEDIENTE ESCANEADO"); return; }
-            this.expedienteEscaneado = val;
-            expediente.value = val;
-            if(valNumero) numeroUnico.value = valNumero;
-            this.cerrarExpediente();
-        }
     }
 };
 
@@ -9907,7 +9918,7 @@ window.onload = () => {
     function val(id){ var e = document.getElementById(id); return e ? (e.value || '').trim() : ''; }
     function contar(){
         var n = 0;
-        ['listaDrogasGuardadas','listaArmasGuardadas','listaContravGuardadas'].forEach(function(id){
+        ['listaDrogasGuardadas','listaArmasGuardadas','listaContravGuardadas','listaDineroGuardado'].forEach(function(id){
             var l = document.getElementById(id);
             if(l) n += l.querySelectorAll('.itemGuardado:not(.vacio)').length;
         });
@@ -9915,7 +9926,7 @@ window.onload = () => {
     }
     function textoDecomisos(){
         var out = [];
-        ['listaDrogasGuardadas','listaArmasGuardadas','listaContravGuardadas'].forEach(function(id){
+        ['listaDrogasGuardadas','listaArmasGuardadas','listaContravGuardadas','listaDineroGuardado'].forEach(function(id){
             var l = document.getElementById(id); if(!l) return;
             l.querySelectorAll('.itemGuardado:not(.vacio)').forEach(function(d){
                 var t = d.innerHTML.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').trim();
